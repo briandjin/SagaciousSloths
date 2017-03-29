@@ -22,7 +22,7 @@ var sheetRange = process.env.SHEETRANGE;
 
 exports.getAllCards = function (callback) {
   let query = url + spreadsheetId + sheetRange + API_KEY;
-  // console.log('query', query);
+  console.log('query', query);
 
   https.get(query, (res) => {
     const statusCode = res.statusCode;
