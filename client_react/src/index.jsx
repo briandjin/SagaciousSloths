@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Answer from './components/Answer.jsx';
 import Menubar from './components/Menubar.jsx';
-import Wild from './components/Wild.jsx';
+import Game from './components/Game.jsx';
+import DeckOptionsInput from './components/DeckOptionsInput.jsx';
 import $ from 'jquery';
 import axios from 'axios';
 
@@ -139,16 +140,16 @@ class Quiz extends React.Component {
   }
 
   render() {
-    console.log('cards', this.state.cards)
     if (this.state.ifWild) {
       return (
-        <Wild cards={this.state.cards}/>
+        // <Game cards={this.state.cards}/>
+        <DeckOptionsInput />
       )
     };
 
     return (
       <div>
-      <Menubar items={['Log Out', 'Dashboard']} loadDashboard={this.loadDashboard}/>
+      <Menubar loadDashboard={this.loadDashboard}/>
 
       {this.state.page === 'dashboard' ? (
         <div className="cohortButtonContainer">
@@ -197,12 +198,6 @@ class Quiz extends React.Component {
       )}
       </div>
     );
-
-    if (ifWild) {
-      return (
-        <Wild cards={this.state.cards}/>
-      )
-    };
   }
 }
 
