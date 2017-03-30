@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Answer from './components/Answer.jsx';
 import Menubar from './components/Menubar.jsx';
+import Wild from './components/Wild.jsx';
 import $ from 'jquery';
 import axios from 'axios';
-import Wild from './components/Wild.jsx';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class Quiz extends React.Component {
     this.moveBackToReady = this.moveBackToReady.bind(this);
     this.renderNextStudent = this.renderNextStudent.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
+    this.wild = this.wild.bind(this);
   }
 
   componentDidMount () {
@@ -125,6 +126,12 @@ class Quiz extends React.Component {
   }
 
   render() {
+    if (this.state.ifWild) {
+      return (
+        <Wild cards={this.state.cards}/>
+      )
+    };
+
     return (
       <div>
       <Menubar items={['Log Out', 'Dashboard']} loadDashboard={this.loadDashboard}/>
@@ -148,10 +155,8 @@ class Quiz extends React.Component {
               </div>
             );
           })}
-        <div className="cohortButtonContainer">
-          <div>
-            <button onClick={this.wild}>WILD</button>
-          </div>
+        <div className="cohortButton" key='wild' onClick={this.wild}>
+          WILD
         </div>
       </div>
     ) : (
@@ -178,12 +183,6 @@ class Quiz extends React.Component {
       )}
       </div>
     );
-
-    if (ifWild) {
-      return (
-        <Wild cards={this.state.cards}/>
-      )
-    };
   }
 }
 
