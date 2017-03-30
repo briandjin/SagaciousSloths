@@ -5,20 +5,34 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 'start'
+      display: 'start',
+      counter: 0,
+      points: 0
     }
+    this.onCorrect = this.onCorrect.bind(this);
+    this.onAlmost = this.onAlmost.bind(this);
+    this.onMiss = this.onMiss.bind(this);
     this.onAnswer = this.onAnswer.bind(this);
+    this.onShowAnswer = this.onShowAnswer.bind(this);
     this.onHint = this.onHint.bind(this);
   }
+
   componentDidMount () {
     console.log('cards', this.props.cards);
   }
 
-  onAnswer () {
-    this.setState({display: 'answer'});
+  onAnswer() {
+    this.setState({
+      counter: this.state.counter + 1,
+      display: 'start'
+    });
   }
 
-  onHint () {
+  onShowAnswer() {
+    this.setState({display: 'show answer'});
+  }
+
+  onHint() {
     if (this.state.display !== 'hint') {
       this.setState({display: 'hint'});
     } else {
@@ -26,11 +40,27 @@ class Game extends React.Component {
     }
   }
 
-  render () {
+  onCorrect() {
+    this.setState({points: this.state.points + 2});
+    this.onAnswer();
+  }
+
+  onAlmost() {
+    this.setState({points: this.state.points + 1});
+    this.onAnswer();
+  }
+
+  onMiss() {
+    this.setState({points: this.state.points + 0});
+    this.onAnswer();
+  }
+
+  render() {
+    var currentCard = this.props.cards[this.state.counter];
     if (this.state.display === 'hint') {
       return (
         <Card>
-          <Image src={this.props.cards[0].pictureUrl} />
+          <Image src={currentCard.pictureUrl} />
           <Card.Header>
             Hint:
           </Card.Header>
@@ -41,13 +71,13 @@ class Game extends React.Component {
           </Card.Meta>
           <Card.Content extra>
             <div className='ui two buttons'>
-              <Button 
+              <Button
                 basic color='green'
-                onClick={this.onAnswer}
+                onClick={this.onShowAnswer}
               >
               Answer
               </Button>
-              <Button 
+              <Button
                 basic color='yellow'
                 onClick={this.onHint}
               >
@@ -57,43 +87,48 @@ class Game extends React.Component {
           </Card.Content>
         </Card>
       )
-    } else if (this.state.display === 'answer') {
+    } else if (this.state.display === 'show answer') {
       return (
         <Card>
-          <Image src={this.props.cards[0].pictureUrl} />
+          <Image src={currentCard.pictureUrl} />
+          <div>
+            {currentCard.firstname + ' ' + currentCard.lastname}
+          </div>
           <Card.Content>
-              <Button 
+              <Button
                 basic color='green'
+                onClick={this.onCorrect}
               >
               Correct
               </Button>
-              <Button 
+              <Button
                 basic color='yellow'
+                onClick={this.onAlmost}
               >
               Almost
-              </Button>              
-              <Button 
+              </Button>
+              <Button
                 basic color='red'
+                onClick={this.onMiss}
               >
               Miss
               </Button>
-
           </Card.Content>
         </Card>
       )
-    } else {
+    } else if (this.state.display === 'start') {
       return (
         <Card>
-          <Image src={this.props.cards[0].pictureUrl} />
+          <Image src={this.props.cards[this.state.counter].pictureUrl} />
           <Card.Content>
             <div className='ui two buttons'>
-              <Button 
+              <Button
                 basic color='green'
-                onClick={this.onAnswer}
+                onClick={this.onShowAnswer}
               >
               Answer
               </Button>
-              <Button 
+              <Button
                 basic color='yellow'
                 onClick={this.onHint}
               >

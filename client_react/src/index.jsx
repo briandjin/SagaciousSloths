@@ -143,8 +143,8 @@ class Quiz extends React.Component {
   render() {
     if (this.state.ifWild) {
       return (
-        // <Game cards={this.state.cards}/>
-        <DeckOptionsInput />
+        <Game cards={this.state.cards}/>
+        // <DeckOptionsInput />
       )
     };
 
