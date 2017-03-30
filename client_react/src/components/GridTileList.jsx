@@ -1,9 +1,10 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
+import {GridList} from 'material-ui/GridList';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Subheader from 'material-ui/Subheader';
+import GridTileEntry from './GridTileEntry.jsx';
 
 const GridTileList = function (props) {
   const styles = {
@@ -22,37 +23,16 @@ const GridTileList = function (props) {
     },
   };
 
-  const tilesData = [
-    {
-      img: 'http://i.imgur.com/9Aj5str.jpg',
-      title: 'Breakfast',
-      author: 'jill111',
-    },
-    {
-      img: 'http://i.imgur.com/w7D2E7q.jpg',
-      title: 'Tasty burger',
-      author: 'pashminu',
-    },
-    {
-      img: 'http://i.imgur.com/avHn4Gw.jpg',
-      title: 'Camera',
-      author: 'Danson67',
-    },
-  ];
   return (
     <MuiThemeProvider>
       <div style={styles.root}>
           <GridList style={styles.gridList} cols={2.2}>
-          {tilesData.map((tile) => (
-            <GridTile
-              key={tile.img}
-              title={tile.title}
-              titleStyle={styles.titleStyle}
-              titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-            >
-              <img src={tile.img} />
-            </GridTile>
-          ))}
+          {props.cards.map((card, index) => (
+            <GridTileEntry 
+              card={card}
+              index={index}
+              style={styles}
+            />))}
         </GridList>
       </div>
     </MuiThemeProvider>

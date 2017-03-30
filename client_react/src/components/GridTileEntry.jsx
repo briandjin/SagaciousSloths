@@ -16,12 +16,11 @@ class GridTileEntry extends React.Component {
     return (
       <GridTile
         index={this.props.index}
-        key={this.props.tile.id}
-        title={this.proptile.title}
-        titleStyle={this.props.styles.titleStyle}
+        key={this.props.card.id}
+        titleStyle={this.props.style.titleStyle}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
       >
-        <img src={tile.img} />
+        <img src={this.props.card.pictureUrl} />
       </GridTile>
     )
   }
