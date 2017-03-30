@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Answer from './components/Answer.jsx';
 import Menubar from './components/Menubar.jsx';
+import Wild from './components/Wild.jsx';
 import $ from 'jquery';
 import axios from 'axios';
 
@@ -14,7 +15,8 @@ class Quiz extends React.Component {
       ready: false,
       page: 'dashboard',
       cohortList: [],
-      cohortStats: {}
+      cohortStats: {},
+      ifWild: false
     };
     this.isReady = this.isReady.bind(this);
     this.loadQuiz = this.loadQuiz.bind(this);
@@ -22,6 +24,7 @@ class Quiz extends React.Component {
     this.moveBackToReady = this.moveBackToReady.bind(this);
     this.renderNextStudent = this.renderNextStudent.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
+    this.wild = this.wild.bind(this);
   }
 
   componentDidMount () {
@@ -41,6 +44,10 @@ class Quiz extends React.Component {
         page: 'dashboard'
       });
     });
+  }
+
+  wild () {
+    this.setState({ ifWild: !this.state.ifWild })
   }
 
   saveUserAnswer(event, answer) {
@@ -119,9 +126,16 @@ class Quiz extends React.Component {
   }
 
   render() {
+    if (this.state.ifWild) {
+      return (
+        <Wild cards={this.state.cards}/>
+      )
+    };
+
     return (
       <div>
       <Menubar items={['Log Out', 'Dashboard']} loadDashboard={this.loadDashboard}/>
+
       {this.state.page === 'dashboard' ? (
         <div className="cohortButtonContainer">
           {this.state.cohortList.map((cohort, index) => {
@@ -141,8 +155,11 @@ class Quiz extends React.Component {
               </div>
             );
           })}
+        <div className="cohortButton" key='wild' onClick={this.wild}>
+          WILD
         </div>
-      ) : (
+      </div>
+    ) : (
         <div id="quiz">
           <div>
             <img className="profilePic" src={this.state.cards[this.state.counter].pictureUrl}/>
@@ -166,6 +183,12 @@ class Quiz extends React.Component {
       )}
       </div>
     );
+
+    if (ifWild) {
+      return (
+        <Wild cards={this.state.cards}/>
+      )
+    };
   }
 }
 
