@@ -45,7 +45,9 @@
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
     "react-tap-event-plugin": "^2.0.1",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "semantic-ui-css": "^2.2.10",
+    "semantic-ui-react": "^0.67.2"
   },
   "devDependencies": {
     "axios": "^0.15.3",
