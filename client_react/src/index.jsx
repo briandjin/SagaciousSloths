@@ -18,7 +18,6 @@ class Quiz extends React.Component {
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
-      ifWild: false
     };
     this.isReady = this.isReady.bind(this);
     this.loadQuiz = this.loadQuiz.bind(this);
@@ -26,17 +25,17 @@ class Quiz extends React.Component {
     this.moveBackToReady = this.moveBackToReady.bind(this);
     this.renderNextStudent = this.renderNextStudent.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
-    this.wild = this.wild.bind(this);
-    this.getWildCards = this.getWildCards.bind(this);
+    this.startGame = this.startGame.bind(this);
+    this.getAllCards = this.getAllCards.bind(this);
 
   }
 
   componentDidMount () {
     this.loadDashboard();
-    this.getWildCards();
+    this.getAllCards();
   }
 
-  getWildCards() {
+  getAllCards() {
     var _this = this;
     axios.get('/getWild')
     .then(function (response) {
@@ -61,8 +60,8 @@ class Quiz extends React.Component {
     });
   }
 
-  wild () {
-    this.setState({ ifWild: !this.state.ifWild })
+  startGame () {
+    this.setState({ page: 'game' })
   }
 
   saveUserAnswer(event, answer) {
@@ -141,10 +140,12 @@ class Quiz extends React.Component {
   }
 
   render() {
-    if (this.state.ifWild) {
+    if (this.state.page === 'game') {
       return (
-        <Game cards={this.state.cards}/>
-        // <DeckOptionsInput />
+        <div>
+          <Menubar loadDashboard={this.loadDashboard}/>
+          <Game cards={this.state.cards}/>
+        </div>
       )
     };
 
@@ -175,13 +176,12 @@ class Quiz extends React.Component {
                   </td>
                 );
               })}
-              <div className="cohortButton" key='wild' onClick={this.wild}>
-                WILD
-              </div>
             </tr>
             </tbody>
           </table>
-        <DeckOptionsInput list={this.state.cohortList}/>
+        <DeckOptionsInput
+          list={this.state.cohortList}
+          startGame={this.startGame}/>
       </div>
     ) : (
         <div id="quiz">

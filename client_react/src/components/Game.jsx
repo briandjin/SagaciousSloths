@@ -57,9 +57,13 @@ class Game extends React.Component {
 
   render() {
     var currentCard = this.props.cards[this.state.counter];
+
     if (this.state.display === 'hint') {
       return (
         <Card>
+          <div>
+            SCORE: {this.state.points}
+          </div>
           <Image src={currentCard.pictureUrl} />
           <Card.Header>
             Hint:
@@ -90,6 +94,9 @@ class Game extends React.Component {
     } else if (this.state.display === 'show answer') {
       return (
         <Card>
+          <div>
+            SCORE: {this.state.points}
+          </div>
           <Image src={currentCard.pictureUrl} />
           <div>
             {currentCard.firstname + ' ' + currentCard.lastname}
@@ -119,6 +126,9 @@ class Game extends React.Component {
     } else if (this.state.display === 'start') {
       return (
         <Card>
+          <div>
+            SCORE: {this.state.points}
+          </div>
           <Image src={this.props.cards[this.state.counter].pictureUrl} />
           <Card.Content>
             <div className='ui two buttons'>
