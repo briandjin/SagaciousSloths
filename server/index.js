@@ -33,8 +33,8 @@ function(username, password, done) {
     return done(null, user);
   });
 }
-));	
-  
+));
+
 passport.serializeUser(function(user, done) {
   // console.log('!!!!!!!!!! serialize being called for user:', user);
   done(null, user.id);
@@ -49,7 +49,7 @@ passport.deserializeUser(function(id, done) {
 
 app.use(cookieParser());
 
-app.use(session({ 
+app.use(session({
   secret: 'DavidJeffJGKay',
   resave: false,
   saveUninitialized: false
@@ -58,7 +58,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// ---------- Other uses
+// ---------- Other uses ----------
 
 
 app.use(express.static(__dirname + '/../public/'));
