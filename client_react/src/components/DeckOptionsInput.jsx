@@ -2,12 +2,13 @@ import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
 
 const DeckOptionsInput = function (props) {
+  console.log('list passed into DeckOptionsInput: ', props.list)
   return (
-    <div> 
+    <div className='deckOptionsInput'> 
       <Form>
         <Form.Group grouped>
-          <label>HTML radios</label>
-          <Form.Field label='Hrsf-72' control='input' type='checkbox' />
+          <label>Build a Deck</label>
+          <Form.Field className='ui toggle checkbox' label='Hrsf-72' control='input' type='checkbox' />
           <Form.Field label='Hrsf-73' control='input' type='checkbox' />
           <Form.Field label='Staff' control='input' type='checkbox' />
           <Form.Field label='HIR' control='input' type='checkbox' />

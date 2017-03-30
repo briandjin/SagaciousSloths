@@ -149,30 +149,37 @@ class Quiz extends React.Component {
 
     return (
       <div>
-      <Menubar loadDashboard={this.loadDashboard}/>
+        <Menubar loadDashboard={this.loadDashboard}/>
 
-      {this.state.page === 'dashboard' ? (
-        <div className="cohortButtonContainer">
-          {this.state.cohortList.map((cohort, index) => {
-            var _cohort = cohort;
-            return (
-              <div>
-                <div className="statBox">
-                  <span className="redStat">{this.state.cohortStats[cohort].red}</span>
-                  <span className="orangeStat">{this.state.cohortStats[cohort].orange}</span>
-                  <span className="greenStat">{this.state.cohortStats[cohort].green}</span>
-                </div>
-                <div>
-                  <div key={index} onClick={(cohort) => { this.loadQuiz(cohort); }} className="cohortButton">
-                    {cohort}
-                  </div>
-                </div>
+        {this.state.page === 'dashboard' ? (
+        <div>
+          <table className="cohortButtonContainer">
+            <tbody>
+            <tr>
+              {this.state.cohortList.map((cohort, index) => {
+                var _cohort = cohort;
+                return (
+                  <td>
+                    <div className="statBox">
+                      <span className="redStat">{this.state.cohortStats[cohort].red}</span>
+                      <span className="orangeStat">{this.state.cohortStats[cohort].orange}</span>
+                      <span className="greenStat">{this.state.cohortStats[cohort].green}</span>
+                    </div>
+                    <div>
+                      <div key={index} onClick={(cohort) => { this.loadQuiz(cohort); }} className="cohortButton">
+                        {cohort}
+                      </div>
+                    </div>
+                  </td>
+                );
+              })}
+              <div className="cohortButton" key='wild' onClick={this.wild}>
+                WILD
               </div>
-            );
-          })}
-        <div className="cohortButton" key='wild' onClick={this.wild}>
-          WILD
-        </div>
+            </tr>
+            </tbody>
+          </table>
+        <DeckOptionsInput list={this.state.cohortList}/>
       </div>
     ) : (
         <div id="quiz">
