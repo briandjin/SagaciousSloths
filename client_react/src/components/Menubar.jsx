@@ -9,8 +9,6 @@ class Menubar extends React.Component {
     this.state = {
       
     }; 
-    this.handleLogout = this.handleLogout.bind(this);
-    this.handleDashboard = this.handleDashboard.bind(this);
     this.logOut = this.logOut.bind(this);
   }
   // SS code
@@ -25,14 +23,6 @@ class Menubar extends React.Component {
   //     this.logOut();
   //   };
   // }
-
-  handleLogout () {
-    this.logOut();
-  }
-
-  handleDashboard () {
-    this.props.loadDashboard();
-  }
 
   logOut() {
     $.ajax({
@@ -50,10 +40,9 @@ class Menubar extends React.Component {
   render() { 
     return (
       <Menu pointing secondary>
-        <Menu.Item name='Home' active={this.state.activeItem === 'home'} onClick={this.handleLogoutClick} />
-        <Menu.Item name='Dashboard' active={this.state.activeItem === 'messages'} onClick={this.handleDashboard} />
+        <Menu.Item name='Home' active={this.state.activeItem === 'home'} onClick={this.props.loadDashboard} />
         <Menu.Menu position='right'>
-          <Menu.Item name='Logout' active={this.state.activeItem === 'logout'} onClick={this.handleLogout} />
+          <Menu.Item name='Logout' active={this.state.activeItem === 'logout'} onClick={this.logOut} />
         </Menu.Menu>
       </Menu>
     );
