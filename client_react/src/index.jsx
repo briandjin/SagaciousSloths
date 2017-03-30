@@ -6,6 +6,7 @@ import Game from './components/Game.jsx';
 import DeckOptionsInput from './components/DeckOptionsInput.jsx';
 import $ from 'jquery';
 import axios from 'axios';
+import {Jumbotron} from 'react-bootstrap';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -149,6 +150,7 @@ class Quiz extends React.Component {
 
     return (
       <div>
+        <Jumbotron><img src='../logo.png' style={{width:'100%'}}/></Jumbotron>
         <Menubar loadDashboard={this.loadDashboard}/>
 
         {this.state.page === 'dashboard' ? (
