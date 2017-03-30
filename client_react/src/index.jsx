@@ -25,10 +25,22 @@ class Quiz extends React.Component {
     this.renderNextStudent = this.renderNextStudent.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
     this.wild = this.wild.bind(this);
+    this.getWildCards = this.getWildCards.bind(this);
+
   }
 
   componentDidMount () {
     this.loadDashboard();
+    this.getWildCards();
+  }
+
+  getWildCards() {
+    axios.get('/getWild')
+    .then(function (response) {
+      this.setState({
+        cards: response.data
+      });
+    })
   }
 
   loadDashboard () {
