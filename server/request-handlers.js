@@ -33,9 +33,9 @@ var getDeckBucketCounts = function (req, res) {
       //   pictureUrl: 'http//jg...',
       //   deck: 'HRSF74'
       // },..];
-      
+
       //console.log('cards:', cards);
-      
+
 
       let results = {};
 
@@ -70,8 +70,8 @@ var getDeckBucketCounts = function (req, res) {
 
       res.status(200).send(results);
       // {deckname: {red: score, orange: score, green: score}, ...}
-      
-    });    
+
+    });
   });
 };
 
@@ -79,7 +79,7 @@ var getDeckBucketCounts = function (req, res) {
 // GET /quiz/:deckname -------------------
 var getDeckQuiz = function (req, res) {
 
-  var deckname = req.query.deck;  
+  var deckname = req.query.deck;
 
   console.log('in get deck quiz, req.user:', req.user);
 
@@ -116,8 +116,8 @@ var getDeckQuiz = function (req, res) {
       // console.log('@@@@@@@@@ Sending to React the cards:', quizCards);
 
       res.status(200).send(quizCards);
-      
-    });    
+
+    });
   });
 };
 
@@ -151,10 +151,17 @@ var resetMongo = function (req, res) {
   });
 };
 
+var getWildCards = function (req, res) {
+  googleSheet.getAllCards(function(cards) {
+    res.status(200).send(cards);
+  });
+};
+
 //------ Exports -------------------------
 module.exports = {
   dashboard: {
     get: getDeckBucketCounts,
+    getWild: getWildCards,
   },
   quiz: {
     get: getDeckQuiz,

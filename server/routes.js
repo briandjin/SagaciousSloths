@@ -17,7 +17,7 @@ router.post('/signup', authentication.signup);
 // router.get('/login', authentication.get.login);
 
 router.post('/login',
-  passport.authenticate('local', { 
+  passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login.html',
     // failureFlash: true
@@ -26,6 +26,7 @@ router.post('/login',
   });
 
 router.get('/dashboard', handlers.dashboard.get);
+router.get('/getWild', handlers.dashboard.getWild);
 
 router.get('/quiz', handlers.quiz.get);
 
