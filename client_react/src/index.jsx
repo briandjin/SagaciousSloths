@@ -35,9 +35,10 @@ class Quiz extends React.Component {
   }
 
   getWildCards() {
+    var _this = this;
     axios.get('/getWild')
     .then(function (response) {
-      this.setState({
+      _this.setState({
         cards: response.data
       });
     })
@@ -138,6 +139,7 @@ class Quiz extends React.Component {
   }
 
   render() {
+    console.log('cards', this.state.cards)
     if (this.state.ifWild) {
       return (
         <Wild cards={this.state.cards}/>

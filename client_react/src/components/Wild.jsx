@@ -10,13 +10,15 @@ class Wild extends React.Component {
       ifWild: true,
     }
   }
-  
+
   render() {
     return (
-
-        <div>
-          <GridTileList/>
-        </div>
+      <div>
+        <div>{this.props.cards[0].firstname + " " + this.props.cards[0].lastname}</div>
+          <div>
+            <GridTileList cards={this.props.cards}/>
+          </div>
+      </div>
 
     )
   }
