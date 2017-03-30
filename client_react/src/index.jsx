@@ -183,6 +183,12 @@ class Quiz extends React.Component {
       )}
       </div>
     );
+
+    if (ifWild) {
+      return (
+        <Wild cards={this.state.cards}/>
+      )
+    };
   }
 }
 
