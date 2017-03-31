@@ -9,7 +9,7 @@ class Game extends React.Component {
     this.state = {
       display: 'start',
       counter: 0,
-      points: 0
+      score: 0
     }
     this.onCorrect = this.onCorrect.bind(this);
     this.onAlmost = this.onAlmost.bind(this);
@@ -43,17 +43,17 @@ class Game extends React.Component {
   }
 
   onCorrect() {
-    this.setState({points: this.state.points + 2});
+    this.setState({score: this.state.score + 2});
     this.onAnswer();
   }
 
   onAlmost() {
-    this.setState({points: this.state.points + 1});
+    this.setState({score: this.state.score + 1});
     this.onAnswer();
   }
 
   onMiss() {
-    this.setState({points: this.state.points + 0});
+    this.setState({score: this.state.score + 0});
     this.onAnswer();
   }
 
@@ -62,8 +62,8 @@ class Game extends React.Component {
 
     if (this.state.display === 'hint') {
       return (
-        <HintCard 
-          points={this.state.points}
+        <HintCard
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}
@@ -72,7 +72,7 @@ class Game extends React.Component {
     } else if (this.state.display === 'show answer') {
       return (
         <AnswerCard
-          points={this.state.points}
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onCorrect={this.onCorrect}
           onAlmost={this.onAlmost}
@@ -82,7 +82,7 @@ class Game extends React.Component {
     } else if (this.state.display === 'start') {
       return (
         <StartCard
-          points={this.state.points}
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}

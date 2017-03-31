@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 
 const AnswerCard = function(props) {
-  
+
   var left = {
     float:'left',
     width:100,
@@ -25,10 +25,10 @@ const AnswerCard = function(props) {
 
   return (
     <div style={{width: 400, marginBottom: 200}}>
-      <Card style={{width: '100%', paddingBottm: 15}}>
+      <Card style={{width: '100%', paddingBottom: 15}}>
         <Card.Content>
           <Card.Header>
-            Points: {props.points}
+            SCORE: {props.score}
           </Card.Header>
         </Card.Content>
         <Image src={props.currentCard.pictureUrl} />
@@ -41,21 +41,21 @@ const AnswerCard = function(props) {
               onClick={props.onCorrect}
               style={left}
             >
-            Correct
+            CORRECT
             </Button>
             <Button
               basic color='yellow'
               onClick={props.onAlmost}
               style={center}
             >
-            Almost
+            ALMOST
             </Button>
             <Button
               basic color='red'
               onClick={props.onMiss}
               style={right}
             >
-            Miss
+            MISS
             </Button>
         </Card.Content>
       </Card>
