@@ -27,12 +27,25 @@ class Quiz extends React.Component {
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getAllCards = this.getAllCards.bind(this);
-
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount () {
     this.loadDashboard();
     this.getAllCards();
+  }
+
+  logOut() {
+    $.ajax({
+      url: '/logout',
+      method: 'GET',
+      success: function(data) {
+        document.write(data);
+      }.bind(this),
+      error: function(err) {
+        console.error('error logging out', err);
+      }
+    });
   }
 
   getAllCards() {
@@ -143,7 +156,7 @@ class Quiz extends React.Component {
     if (this.state.page === 'game') {
       return (
         <div>
-          <Menubar loadDashboard={this.loadDashboard}/>
+          <Menubar loadDashboard={this.loadDashboard} logOut={this.logOut}/>
           <Game cards={this.state.cards}/>
         </div>
       )
@@ -152,7 +165,7 @@ class Quiz extends React.Component {
     return (
       <div>
         <Jumbotron><img src='../logo.png' style={{width:'100%'}}/></Jumbotron>
-        <Menubar loadDashboard={this.loadDashboard}/>
+        <Menubar loadDashboard={this.loadDashboard} logOut={this.logOut}/>
 
         {this.state.page === 'dashboard' ? (
         <div>

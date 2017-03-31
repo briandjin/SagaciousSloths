@@ -41,4 +41,8 @@ router.post('/api/card', handlers.api.card);
 
 router.get('/api/reset', handlers.api.reset);
 
+router.post('/leaders/create', handlers.leaders.create);
+
+router.get('/leaders/get', handlers.leaders.get);
+
 module.exports = router;

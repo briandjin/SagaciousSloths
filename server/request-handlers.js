@@ -2,6 +2,7 @@ var googleSheet = require(__dirname + '/../databases/google/google-sheet');
 var mongo = require(__dirname + '/../databases/mongo/models/familiarities');
 var mongoUsers = require(__dirname + '/../databases/mongo/models/users');
 var algorithm = require('./repetition-algorithm');
+var mongoLeaders = require(__dirname + '/../databases/mongo/models/leaders');
 
 
   // NOTE: mongo structure:
@@ -157,6 +158,26 @@ var getWildCards = function (req, res) {
   });
 };
 
+var newLeader = function (req, res) {
+  mongoLeaders.createLeaders(req.body, function(err, leader) {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(200);
+    } 
+  });
+};
+
+var getLeaders = function (req, res) {
+  mongoLeaders.getAllLeaders(function(err, leaders) {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(leaders);
+    }
+  });
+};
+
 //------ Exports -------------------------
 module.exports = {
   dashboard: {
@@ -169,9 +190,9 @@ module.exports = {
   api: {
     reset: resetMongo,
     card: updateUserCardFamiliarity,
-  }
+  },
+  leaders: {
+    create: newLeader,
+    get: getLeaders,
+  },
 };
-
-
-
-

@@ -6,6 +6,7 @@ var passport = require('passport');
 var authentication = require('./authentication');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoUsers = require(__dirname + '/../databases/mongo/models/users');
+var Leaders = require(__dirname + '/../databases/mongo/models/leaders');
 
 
 
