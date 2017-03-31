@@ -6,15 +6,7 @@
 }
 
 .logo {
-  text-align: left;
-  float: left;
-  display: inline-grid;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background-color: #5b91e3;
-  font-family: arial;
-  color: white;
-  list-style: none;
+  width: 100%;
 }
 
 /*refers to "log out" and "dashboard" buttons */

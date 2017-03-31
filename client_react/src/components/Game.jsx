@@ -1,5 +1,7 @@
-import React from 'react'
-import { Card, Icon, Image, Button } from 'semantic-ui-react'
+import React from 'react';
+import HintCard from './HintCard.jsx';
+import AnswerCard from './AnswerCard.jsx';
+import StartCard from './StartCard.jsx';
 
 class Game extends React.Component {
   constructor(props) {
@@ -55,98 +57,36 @@ class Game extends React.Component {
     this.onAnswer();
   }
 
+
   render() {
-    var currentCard = this.props.cards[this.state.counter];
 
     if (this.state.display === 'hint') {
       return (
-        <Card>
-          <div>
-            SCORE: {this.state.points}
-          </div>
-          <Image src={currentCard.pictureUrl} />
-          <Card.Header>
-            Hint:
-          </Card.Header>
-          <Card.Meta>
-            <span className='hint'>
-              Helpful Hint
-            </span>
-          </Card.Meta>
-          <Card.Content extra>
-            <div className='ui two buttons'>
-              <Button
-                basic color='green'
-                onClick={this.onShowAnswer}
-              >
-              Answer
-              </Button>
-              <Button
-                basic color='yellow'
-                onClick={this.onHint}
-              >
-              Hint
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+        <HintCard 
+          points={this.state.points}
+          currentCard={this.props.cards[this.state.counter]}
+          onShowAnswer={this.onShowAnswer}
+          onHint={this.onHint}
+        />
       )
     } else if (this.state.display === 'show answer') {
       return (
-        <Card>
-          <div>
-            SCORE: {this.state.points}
-          </div>
-          <Image src={currentCard.pictureUrl} />
-          <div>
-            {currentCard.firstname + ' ' + currentCard.lastname}
-          </div>
-          <Card.Content>
-              <Button
-                basic color='green'
-                onClick={this.onCorrect}
-              >
-              Correct
-              </Button>
-              <Button
-                basic color='yellow'
-                onClick={this.onAlmost}
-              >
-              Almost
-              </Button>
-              <Button
-                basic color='red'
-                onClick={this.onMiss}
-              >
-              Miss
-              </Button>
-          </Card.Content>
-        </Card>
+        <AnswerCard
+          points={this.state.points}
+          currentCard={this.props.cards[this.state.counter]}
+          onCorrect={this.onCorrect}
+          onAlmost={this.onAlmost}
+          onMiss={this.onMiss}
+        />
       )
     } else if (this.state.display === 'start') {
       return (
-        <Card>
-          <div>
-            SCORE: {this.state.points}
-          </div>
-          <Image src={this.props.cards[this.state.counter].pictureUrl} />
-          <Card.Content>
-            <div className='ui two buttons'>
-              <Button
-                basic color='green'
-                onClick={this.onShowAnswer}
-              >
-              Answer
-              </Button>
-              <Button
-                basic color='yellow'
-                onClick={this.onHint}
-              >
-              Hint
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+        <StartCard
+          points={this.state.points}
+          currentCard={this.props.cards[this.state.counter]}
+          onShowAnswer={this.onShowAnswer}
+          onHint={this.onHint}
+        />
       )
     }
   }

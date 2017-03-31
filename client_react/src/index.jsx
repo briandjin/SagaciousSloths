@@ -158,8 +158,11 @@ class Quiz extends React.Component {
     if (this.state.page === 'game') {
       return (
         <div>
+          <Jumbotron><img src='../logo.png' style={{width:'100%'}}/></Jumbotron>
           <Menubar loadDashboard={this.loadDashboard} logOut={this.logOut}/>
-          <Game cards={this.state.cards}/>
+          <div style={{margin: 'auto', width: '32%'}}>
+            <Game cards={this.state.cards}/>
+          </div>
         </div>
       )
     };
