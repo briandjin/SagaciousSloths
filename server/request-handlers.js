@@ -4,11 +4,8 @@ var mongoUsers = require(__dirname + '/../databases/mongo/models/users');
 var algorithm = require('./repetition-algorithm');
 var mongoLeaders = require(__dirname + '/../databases/mongo/models/leaders');
 
-
   // NOTE: mongo structure:
   //   userId, cardId, algoData (an object) {bucket: 'red/orange/green'}
-
-
 
 // GET /dashboard ----------------
 var getDeckBucketCounts = function (req, res) {
