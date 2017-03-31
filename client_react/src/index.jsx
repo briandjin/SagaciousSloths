@@ -4,6 +4,7 @@ import Answer from './components/Answer.jsx';
 import Menubar from './components/Menubar.jsx';
 import Game from './components/Game.jsx';
 import DeckOptionsInput from './components/DeckOptionsInput.jsx';
+import LeaderBoard from './components/leaderBoard.jsx';
 import $ from 'jquery';
 import axios from 'axios';
 import {Jumbotron} from 'react-bootstrap';
@@ -18,7 +19,8 @@ class Quiz extends React.Component {
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
-      ifWild: false
+      ifWild: false,
+      highScores: [{nickname: 'bryan', score: 99999999}, {nickname: 'allen', score: 1}]
     };
     this.isReady = this.isReady.bind(this);
     this.loadQuiz = this.loadQuiz.bind(this);
@@ -175,13 +177,11 @@ class Quiz extends React.Component {
                   </td>
                 );
               })}
-              <div className="cohortButton" key='wild' onClick={this.wild}>
-                WILD
-              </div>
             </tr>
             </tbody>
           </table>
         <DeckOptionsInput list={this.state.cohortList}/>
+        <LeaderBoard scores={this.state.highScores}/>
       </div>
     ) : (
         <div id="quiz">

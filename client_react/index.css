@@ -253,16 +253,28 @@
   width: 100%;
   height: 20%;
   margin-left: 15px;
+  margin-right: 15px;
   overflow-x: auto;
 }
 
 .deckOptionsInput {
-  width: 50%;
+  display: inline-table;
+  width: 200px;
   height: 40%;
   margin-left: 20px;
   margin-top: 50px;
+  margin-right: 20px;
 }
 
 .toggleButton {
   padding-right: 10px;
+}
+
+.leaderBoard {
+  display: inline-table;
+  width: 200px;
+  height: 40%;
+  margin-left: 20px;
+  margin-top: 50px;
+  margin-right: 20px;
 }
