@@ -20,6 +20,7 @@ class Quiz extends React.Component {
       cohortList: [],
       cohortStats: {},
       highScores: [{nickname: 'bryan', score: 99999999}, {nickname: 'allen', score: 1}],
+      gameDecks: [],
     };
     this.isReady = this.isReady.bind(this);
     this.loadQuiz = this.loadQuiz.bind(this);
@@ -30,6 +31,7 @@ class Quiz extends React.Component {
     this.startGame = this.startGame.bind(this);
     this.getAllCards = this.getAllCards.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.addToSearch = this.addToSearch.bind(this);
   }
 
   componentDidMount () {
@@ -154,6 +156,23 @@ class Quiz extends React.Component {
     });
   }
 
+  addToSearch(e) {
+    // var newArray = this.state.gameDecks.slice();
+    // newArray.push(e.target.value);
+    if (this.state.gameDecks.indexOf(e.target.value) < 0) {
+      this.setState({
+        gameDecks: this.state.gameDecks.concat(e.target.value),
+      })
+    } else {
+      var clone = this.state.gameDecks.slice();
+      var indexToSplice = clone.indexOf(e.target.value);
+      clone.splice(indexToSplice, 1);
+      this.setState({
+        gameDecks: clone,
+      })
+    }
+  }
+
   render() {
     if (this.state.page === 'game') {
       return (
@@ -200,7 +219,8 @@ class Quiz extends React.Component {
         <div>
         <DeckOptionsInput
           list={this.state.cohortList}
-          startGame={this.startGame}/>
+          startGame={this.startGame}
+          addToSearch={this.addToSearch}/>
         </div>
         <div>
           <LeaderBoard scores={this.state.highScores}/>
