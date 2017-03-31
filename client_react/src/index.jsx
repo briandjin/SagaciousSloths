@@ -7,7 +7,7 @@ import DeckOptionsInput from './components/DeckOptionsInput.jsx';
 import LeaderBoard from './components/leaderBoard.jsx';
 import $ from 'jquery';
 import axios from 'axios';
-import {Jumbotron} from 'react-bootstrap';
+import {Jumbotron, Col} from 'react-bootstrap';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -194,9 +194,14 @@ class Quiz extends React.Component {
             </tr>
             </tbody>
           </table>
+        <div>
         <DeckOptionsInput
           list={this.state.cohortList}
           startGame={this.startGame}/>
+        </div>
+        <div>
+          <LeaderBoard scores={this.state.highScores}/>
+        </div>
       </div>
     ) : (
         <div id="quiz">
