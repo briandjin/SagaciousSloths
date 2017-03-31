@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Button, Radio } from 'semantic-ui-react';
 
 const DeckOptionsInput = function (props) {
-  console.log('list passed into DeckOptionsInput: ', props.list)
   return (
     <div className='deckOptionsInput'>
       <h3>Build a Deck</h3>

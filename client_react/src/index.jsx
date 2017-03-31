@@ -4,6 +4,7 @@ import Answer from './components/Answer.jsx';
 import Menubar from './components/Menubar.jsx';
 import Game from './components/Game.jsx';
 import DeckOptionsInput from './components/DeckOptionsInput.jsx';
+import LeaderBoard from './components/leaderBoard.jsx';
 import $ from 'jquery';
 import axios from 'axios';
 import {Jumbotron} from 'react-bootstrap';
@@ -18,6 +19,7 @@ class Quiz extends React.Component {
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
+      highScores: [{nickname: 'bryan', score: 99999999}, {nickname: 'allen', score: 1}],
     };
     this.isReady = this.isReady.bind(this);
     this.loadQuiz = this.loadQuiz.bind(this);
