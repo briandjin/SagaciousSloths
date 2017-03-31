@@ -6,7 +6,7 @@ const LeaderBoard = (props) => {
   		<h3>Leader Board</h3>
 	  	<table>
 	  	  <thead>
-	  	    <th style={{'padding-right': '50px'}}>NAME</th>
+	  	    <th style={{'paddingRight': '50px'}}>NAME</th>
 	  	    <th>SCORE</th>
 	  	  </thead>
 	  	  <tbody>

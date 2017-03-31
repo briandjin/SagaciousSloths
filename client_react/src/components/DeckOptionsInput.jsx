@@ -6,6 +6,7 @@ const DeckOptionsInput = function (props) {
     <div className='deckOptionsInput'> 
       <h3>Build a Deck</h3>
       <table>
+      <tbody>
       {props.list.map((entry) => {
         return (
           <tr>
@@ -18,6 +19,7 @@ const DeckOptionsInput = function (props) {
           </tr>
         )
       })}
+      </tbody>
       </table>
 
       <Button basic color='orange' >Start</Button>
