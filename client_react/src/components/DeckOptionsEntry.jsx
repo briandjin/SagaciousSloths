@@ -4,15 +4,18 @@ import {Radio} from 'semantic-ui-react';
 class DeckOptionsEntry extends React.Component {
   constructor(props) {
   	super(props);
+  	this.state = {
+
+  	}
   }
 
   render() {
   	return (
       <tr>
-        <td className="toggleButton">
-          <Radio toggle/>
+        <td>
+          <input type="checkbox" value={this.props.data} onClick={this.props.addToSearch}/>
         </td>
-        <td onClick={console.log(`${this.props.data}'s index is: ${this.props.index}`)}>
+        <td>
           {this.props.data}
         </td>
       </tr>

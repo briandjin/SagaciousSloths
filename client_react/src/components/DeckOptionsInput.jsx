@@ -3,7 +3,6 @@ import { Form, Button, Radio } from 'semantic-ui-react';
 import DeckOptionsEntry from './DeckOptionsEntry.jsx'
 
 const DeckOptionsInput = function (props) {
-  console.log('props in DeckOptionsInput: ', props);
   return (
     <div className='deckOptionsInput'>
       <h3>Build a Deck</h3>
@@ -11,7 +10,7 @@ const DeckOptionsInput = function (props) {
         <tbody>
         {props.list.map((entry, index) => {
           return (
-            <DeckOptionsEntry data={entry} index={index}/>
+            <DeckOptionsEntry data={entry} index={index} addToSearch={props.addToSearch}/>
           )
         })}
         </tbody>
