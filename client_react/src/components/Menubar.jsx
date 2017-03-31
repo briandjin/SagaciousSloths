@@ -7,10 +7,11 @@ class Menubar extends React.Component {
     super(props);
 
     this.state = {
-      
-    }; 
+
+    };
     this.logOut = this.logOut.bind(this);
   }
+
   // SS code
   // handleMenuSelect(index) {
   //   this.setState({
@@ -37,12 +38,12 @@ class Menubar extends React.Component {
     });
   }
 
-  render() { 
+  render() {
     return (
       <Menu pointing secondary>
-        <Menu.Item name='Home' active={this.state.activeItem === 'home'} onClick={this.props.loadDashboard} />
+        <Menu.Item name='HOME' active={this.state.activeItem === 'home'} onClick={this.props.loadDashboard} />
         <Menu.Menu position='right'>
-          <Menu.Item name='Logout' active={this.state.activeItem === 'logout'} onClick={this.logOut} />
+          <Menu.Item name='LOGOUT' active={this.state.activeItem === 'logout'} onClick={this.logOut} />
         </Menu.Menu>
       </Menu>
     );

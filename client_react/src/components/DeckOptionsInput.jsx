@@ -4,7 +4,7 @@ import { Form, Button, Radio } from 'semantic-ui-react';
 const DeckOptionsInput = function (props) {
   console.log('list passed into DeckOptionsInput: ', props.list)
   return (
-    <div className='deckOptionsInput'> 
+    <div className='deckOptionsInput'>
       <h3>Build a Deck</h3>
       <table>
       {props.list.map((entry) => {
@@ -21,7 +21,11 @@ const DeckOptionsInput = function (props) {
       })}
       </table>
 
-      <Button basic color='orange' >Start</Button>
+      <Button
+        onClick={props.startGame}
+        basic color='orange'>
+        Start
+      </Button>
 
     </div>
   )
