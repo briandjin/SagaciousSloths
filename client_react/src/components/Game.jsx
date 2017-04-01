@@ -9,7 +9,8 @@ class Game extends React.Component {
     this.state = {
       display: 'start',
       counter: 0,
-      points: 0
+      score: 0,
+      // roundPoints: 150,
     }
     this.onCorrect = this.onCorrect.bind(this);
     this.onAlmost = this.onAlmost.bind(this);
@@ -17,6 +18,7 @@ class Game extends React.Component {
     this.onAnswer = this.onAnswer.bind(this);
     this.onShowAnswer = this.onShowAnswer.bind(this);
     this.onHint = this.onHint.bind(this);
+    // this.resetRoundPoints = this.resetRoundPoints.bind(this);
   }
 
   componentDidMount () {
@@ -36,56 +38,68 @@ class Game extends React.Component {
 
   onHint() {
     if (this.state.display !== 'hint') {
-      this.setState({display: 'hint'});
+      this.setState({
+        display: 'hint',
+        score: this.state.score - 25
+      });
     } else {
       this.setState({display: 'start'})
     }
   }
 
   onCorrect() {
-    this.setState({points: this.state.points + 2});
+    this.setState({score: this.state.score + 150});
+    // this.resetRoundPoints();
     this.onAnswer();
   }
 
   onAlmost() {
-    this.setState({points: this.state.points + 1});
+    this.setState({score: this.state.score + 100});
+    // this.resetRoundPoints();
     this.onAnswer();
   }
 
   onMiss() {
-    this.setState({points: this.state.points + 0});
+    this.setState({score: this.state.score + 0});
+    // this.resetRoundPoints();
     this.onAnswer();
   }
 
+  resetRoundPoints() {
+    this.setState({roundPoints: 150})
+  }
 
   render() {
 
     if (this.state.display === 'hint') {
       return (
-        <HintCard 
-          points={this.state.points}
+        <HintCard
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}
+          roundPoints={this.state.roundPoints}
         />
       )
     } else if (this.state.display === 'show answer') {
       return (
         <AnswerCard
-          points={this.state.points}
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onCorrect={this.onCorrect}
           onAlmost={this.onAlmost}
           onMiss={this.onMiss}
+          roundPoints={this.state.roundPoints}
         />
       )
     } else if (this.state.display === 'start') {
       return (
         <StartCard
-          points={this.state.points}
+          score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}
+          roundPoints={this.state.roundPoints}
         />
       )
     }

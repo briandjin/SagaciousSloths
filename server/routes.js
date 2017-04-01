@@ -26,7 +26,7 @@ router.post('/login',
   });
 
 router.get('/dashboard', handlers.dashboard.get);
-router.get('/getWild', handlers.dashboard.getWild);
+router.get('/legacy', handlers.legacy);
 
 router.get('/quiz', handlers.quiz.get);
 

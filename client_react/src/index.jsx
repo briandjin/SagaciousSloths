@@ -15,7 +15,7 @@ class Quiz extends React.Component {
     this.state = {
       cards: [],
       counter: 0,
-      ready: false,
+      ready: false, 
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
@@ -29,14 +29,39 @@ class Quiz extends React.Component {
     this.renderNextStudent = this.renderNextStudent.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.getAllCards = this.getAllCards.bind(this);
+    this.getLegacyCards = this.getLegacyCards.bind(this);
     this.logOut = this.logOut.bind(this);
     this.addToSearch = this.addToSearch.bind(this);
   }
 
   componentDidMount () {
     this.loadDashboard();
-    this.getAllCards();
+  }
+
+// ------------- GAME -------------
+  getLegacyCards () {
+    var selectedDecks = {
+      gameDecks: this.state.gameDecks
+    };
+
+    $.ajax({
+      url: '/legacy',
+      type: 'GET',
+      data: selectedDecks,
+      success: (selectedCards) => {
+        this.setState({
+          cards: selectedCards
+        })
+        this.startGame();
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
+  }
+
+  startGame () {
+    this.setState({ page: 'game' });
   }
 
   logOut() {
@@ -52,16 +77,6 @@ class Quiz extends React.Component {
     });
   }
 
-  getAllCards() {
-    var _this = this;
-    axios.get('/getWild')
-    .then(function (response) {
-      _this.setState({
-        cards: response.data
-      });
-    })
-  }
-
   loadDashboard () {
     var _this = this;
     axios.get('/dashboard')
@@ -75,10 +90,6 @@ class Quiz extends React.Component {
         page: 'dashboard'
       });
     });
-  }
-
-  startGame () {
-    this.setState({ page: 'game' })
   }
 
   saveUserAnswer(event, answer) {
@@ -217,9 +228,10 @@ class Quiz extends React.Component {
             </tbody>
           </table>
         <div>
+
         <DeckOptionsInput
           list={this.state.cohortList}
-          startGame={this.startGame}
+          getLegacyCards={this.getLegacyCards}
           addToSearch={this.addToSearch}/>
         </div>
         <div>
