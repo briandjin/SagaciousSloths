@@ -84,6 +84,7 @@ class Quiz extends React.Component {
     axios.get('/dashboard')
     .then(function(response) {
       var cohortList = Object.keys(response.data).sort();
+      console.log('response data', response.data)
       _this.setState({
         cohortList: cohortList,
         cohortStats: response.data

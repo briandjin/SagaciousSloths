@@ -2,31 +2,18 @@ import React from 'react';
 import { Card, Icon, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import HintEntry from './HintEntry.jsx';
 
+var dummydata = ['Hint 1', 'Hint 2', 'Hint 3', 4, 5, 6, 7]
+
 class HintCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       submittedHint: '',
       viewHints: false,
-      pointDisplay: 'none',
     }
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
-    this.onWriteHint = this.onWriteHint.bind(this);
-    this.hoverHint = this.hoverHint.bind(this);
-    this.mouseLeave = this.mouseLeave.bind(this);
-  }
-
-  hoverHint() {
-    this.setState({
-      pointDisplay: 'inline',
-    })
-  }
-
-  mouseLeave() {
-    this.setState({
-      pointDisplay: 'none',
-    })
+    this.onSubmitHint = this.onSubmitHint.bind(this);
   }
 
   inputHint (e) {
@@ -44,9 +31,16 @@ class HintCard extends React.Component {
     }
   }
 
-  onWriteHint (e) {
+
+  onSubmitHint (e) {
+    console.log('onSubmitHint')
     e.preventDefault();
-  }
+
+    var info = {
+      submittedHint: this.state.submittedHint
+    }
+    this.props.submitHint();
+  };
 
   render () {
     if(this.state.viewHints === false) {
@@ -83,8 +77,6 @@ class HintCard extends React.Component {
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
-                  onMouseEnter={this.hoverHint}
-                  onMouseLeave={this.mouseLeave}
                 >
                 HINT
                 </Button>
@@ -102,10 +94,12 @@ class HintCard extends React.Component {
                 onClick={this.onViewHints}
               >View Hints</Button>
               <Button
-                onClick={this.onWriteHint}
+                onClick={this.onSubmitHint}
                 size='medium'
                 icon>
-                <Icon name='write' />
+                <Icon 
+                  name='write'
+                />
               </Button>
           </Form>
         </div>
@@ -119,8 +113,11 @@ class HintCard extends React.Component {
                 SCORE: {this.props.score}
               </Card.Header>
             </Card.Content>
-
-            <Image src={this.props.currentCard.pictureUrl} />
+            <div style={{overflow: 'scroll'}}>
+            {dummydata.map(function(data, index) {
+              return <HintEntry key={index} data={data} />
+            })}
+            </div>
             <Card.Header>
               Liked Hints:
             </Card.Header>
@@ -141,8 +138,6 @@ class HintCard extends React.Component {
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
-                  onMouseEnter={this.hoverHint}
-                  onMouseLeave={this.mouseLeave}
                 >
                 HINT
                 </Button>
@@ -160,13 +155,13 @@ class HintCard extends React.Component {
                 onClick={this.onViewHints}
               >View Hints</Button>
               <Button
-                onClick={this.onWriteHint}
+                onClick={this.submitHint}
                 size='medium'
                 icon>
                 <Icon name='write' />
               </Button>
           </Form>
-          <HintEntry />
+          
         </div>
       )
     }

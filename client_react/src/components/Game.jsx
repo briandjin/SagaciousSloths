@@ -21,10 +21,25 @@ class Game extends React.Component {
     this.onShowAnswer = this.onShowAnswer.bind(this);
     this.onHint = this.onHint.bind(this);
     this.submitScore = this.submitScore.bind(this);
+    this.submitHint = this.submitHint.bind(this);
   }
 
   componentDidMount () {
     console.log('cards', this.props.cards);
+  }
+
+  submitHint (info) {
+    // $.ajax({
+    //   url: '',
+    //   type: 'POST',
+    //   data: info,
+    //   success: () => {
+        console.log('Hint Posted');
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //   }
+    // })
   }
 
   submitScore (info) {
@@ -94,6 +109,7 @@ class Game extends React.Component {
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}
           roundPoints={this.state.roundPoints}
+          submitHint={this.submitHint}
         />
       )
     } else if (this.state.display === 'show answer') {
