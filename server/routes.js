@@ -26,9 +26,12 @@ router.post('/login',
   });
 
 router.get('/dashboard', handlers.dashboard.get);
-router.get('/legacy', handlers.legacy);
 
 router.get('/quiz', handlers.quiz.get);
+
+router.get('/legacy', handlers.legacy.getCards);
+
+router.post('/submitScore', handlers.leaders.create);
 
 router.get('/logout',
   function(req, res) {

@@ -38,7 +38,7 @@ class HintCard extends React.Component {
     e.preventDefault();
     if (this.state.viewHints === false) {
       this.setState({viewHints: true});
-    } 
+    }
     else {
       this.setState({viewHints: false});
     }
@@ -48,20 +48,20 @@ class HintCard extends React.Component {
     e.preventDefault();
   }
 
-  render () { 
+  render () {
     if(this.state.viewHints === false) {
       return (
         <div style={{width: 400, marginBottom: 200}}>
           <Card style={{width: '100%', paddingBottom: 15}}>
             <Card.Content>
               <Card.Header>
-                <p style={{"float": "left"}}>SCORE: {this.props.score}</p> 
+                <p style={{"float": "left"}}>SCORE: {this.props.score}</p>
                 <p style={{"float": "right", "display": this.state.pointDisplay}}>
                 -25 POINTS
                 </p>
               </Card.Header>
             </Card.Content>
-            
+
             <Image src={this.props.currentCard.pictureUrl} />
             <Card.Header>
               Liked Hints:
@@ -74,7 +74,7 @@ class HintCard extends React.Component {
             <Card.Content extra>
               <div className='ui two buttons'>
                 <Button
-                  basic 
+                  basic
                   color='green'
                   onClick={this.props.onShowAnswer}
                 >
@@ -93,15 +93,15 @@ class HintCard extends React.Component {
           </Card>
           <Form>
             <Form.Field>
-              <TextArea 
+              <TextArea
                 onChange={this.inputHint}
-                placeholder='Your Hint' 
+                placeholder='Your Hint'
                 autoHeight/>
             </Form.Field>
               <Button
                 onClick={this.onViewHints}
               >View Hints</Button>
-              <Button 
+              <Button
                 onClick={this.onWriteHint}
                 size='medium'
                 icon>
@@ -119,7 +119,7 @@ class HintCard extends React.Component {
                 SCORE: {this.props.score}
               </Card.Header>
             </Card.Content>
-            
+
             <Image src={this.props.currentCard.pictureUrl} />
             <Card.Header>
               Liked Hints:
@@ -132,7 +132,7 @@ class HintCard extends React.Component {
             <Card.Content extra>
               <div className='ui two buttons'>
                 <Button
-                  basic 
+                  basic
                   color='green'
                   onClick={this.props.onShowAnswer}
                 >
@@ -151,15 +151,15 @@ class HintCard extends React.Component {
           </Card>
           <Form>
             <Form.Field>
-              <TextArea 
+              <TextArea
                 onChange={this.inputHint}
-                placeholder='Your Hint' 
+                placeholder='Your Hint'
                 autoHeight/>
             </Form.Field>
               <Button
                 onClick={this.onViewHints}
               >View Hints</Button>
-              <Button 
+              <Button
                 onClick={this.onWriteHint}
                 size='medium'
                 icon>
@@ -169,7 +169,7 @@ class HintCard extends React.Component {
           <HintEntry />
         </div>
       )
-    } 
+    }
   }
 };
 

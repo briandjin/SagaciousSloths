@@ -204,14 +204,20 @@ module.exports = {
   dashboard: {
     get: getDeckBucketCounts,
   },
-  legacy: getLegacyCards,
+
   quiz: {
     get: getDeckQuiz,
   },
+
   api: {
     reset: resetMongo,
     card: updateUserCardFamiliarity,
   },
+
+  legacy: {
+    getCards: getLegacyCards
+  },
+
   leaders: {
     create: newLeader,
     get: getLeaders,

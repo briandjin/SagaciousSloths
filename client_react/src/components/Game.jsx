@@ -2,6 +2,9 @@ import React from 'react';
 import HintCard from './HintCard.jsx';
 import AnswerCard from './AnswerCard.jsx';
 import StartCard from './StartCard.jsx';
+import GameOver from './GameOver.jsx';
+import $ from 'jquery';
+
 
 class Game extends React.Component {
   constructor(props) {
@@ -9,8 +12,7 @@ class Game extends React.Component {
     this.state = {
       display: 'start',
       counter: 0,
-      score: 0,
-      // roundPoints: 150,
+      score: 0
     }
     this.onCorrect = this.onCorrect.bind(this);
     this.onAlmost = this.onAlmost.bind(this);
@@ -18,11 +20,25 @@ class Game extends React.Component {
     this.onAnswer = this.onAnswer.bind(this);
     this.onShowAnswer = this.onShowAnswer.bind(this);
     this.onHint = this.onHint.bind(this);
-    // this.resetRoundPoints = this.resetRoundPoints.bind(this);
+    this.submitScore = this.submitScore.bind(this);
   }
 
   componentDidMount () {
     console.log('cards', this.props.cards);
+  }
+
+  submitScore (info) {
+    $.ajax({
+      url: '/leaders/create',
+      type: 'POST',
+      data: info,
+      success: () => {
+        this.props.loadDashboard();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   onAnswer() {
@@ -30,6 +46,10 @@ class Game extends React.Component {
       counter: this.state.counter + 1,
       display: 'start'
     });
+
+    if (this.state.counter === this.props.cards.length - 1) {
+      this.setState({ display: 'game over' })
+    }
   }
 
   onShowAnswer() {
@@ -61,16 +81,10 @@ class Game extends React.Component {
 
   onMiss() {
     this.setState({score: this.state.score + 0});
-    // this.resetRoundPoints();
     this.onAnswer();
   }
 
-  resetRoundPoints() {
-    this.setState({roundPoints: 150})
-  }
-
   render() {
-
     if (this.state.display === 'hint') {
       return (
         <HintCard
@@ -100,6 +114,13 @@ class Game extends React.Component {
           onShowAnswer={this.onShowAnswer}
           onHint={this.onHint}
           roundPoints={this.state.roundPoints}
+        />
+      )
+    } else if (this.state.display === 'game over') {
+      return (
+        <GameOver
+          score={this.state.score}
+          submitScore={this.submitScore}
         />
       )
     }

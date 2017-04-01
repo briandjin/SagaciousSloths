@@ -1,6 +1,6 @@
 var https = require('https');
 require('dotenv').config();
-'strict'; 
+'strict';
 
 // Google sheet
 const API_KEY = process.env.API_KEY;
@@ -60,7 +60,7 @@ exports.getAllCards = function (callback) {
           card.pictureUrl = elem[2];
           card.deck = elem[3];
           card.id = elem[0] + elem[1] + elem[2] + elem[3];
-
+          card.hints = [];
           if (card.firstname && card.lastname && card.pictureUrl && card.deck) {
             result.push(card);
           }
@@ -73,7 +73,7 @@ exports.getAllCards = function (callback) {
     });
   }).on('error', (e) => {
     console.log(`Got error: ${e.message}`);
-  });  
+  });
 };
 
 // not needed: exports.getAllCardIds = function () {};
@@ -90,7 +90,7 @@ exports.getQuizCards = function (orderedCardIds, deckname, callback) {
     });
 
     var quizCards = [];
-      
+
     // console.log('@@@ cardsObject', cardsObject);
     // console.log('Deckname', deckname);
 
@@ -106,7 +106,7 @@ exports.getQuizCards = function (orderedCardIds, deckname, callback) {
     // the cards not in the list are ignored.
     // console.log('quiz cards:', quizCards);
     callback(quizCards);
-    
+
   });
 };
 

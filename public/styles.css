@@ -4,10 +4,11 @@
 
 .form-container {
   width: 50%;
-  margin: auto; 
+  margin: auto;
 }
 
 .log-sign {
+  font-size: 30px;
   margin-bottom: 15px;
   margin-top: 15px;
 }

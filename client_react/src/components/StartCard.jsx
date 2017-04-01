@@ -29,7 +29,7 @@ class StartCard extends React.Component {
         <Card style={{width: '100%', paddingBottm: 15}}>
           <Card.Content>
             <Card.Header>
-              <p style={{"float": "left"}}>SCORE: {this.props.score}</p> 
+              <p style={{"float": "left"}}>SCORE: {this.props.score}</p>
               <p style={{"float": "right", "display": this.state.pointDisplay}}>
               -25 POINTS
               </p>
@@ -42,7 +42,7 @@ class StartCard extends React.Component {
                 basic color='green'
                 onClick={this.props.onShowAnswer}
               >
-              Answer
+              ANSWER
               </Button>
               <Button
                 basic color='yellow'
@@ -50,7 +50,7 @@ class StartCard extends React.Component {
                 onMouseEnter={this.hoverHint}
                 onMouseLeave={this.mouseLeave}
               >
-              Hint
+              HINT
               </Button>
             </div>
           </Card.Content>
