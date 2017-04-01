@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Icon, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import HintEntry from './HintEntry.jsx';
 
-var dummydata = ['Hint 1', 'Hint 2', 'Hint 3']
+var dummydata = ['Hint 1', 'Hint 2', 'Hint 3', 4, 5, 6, 7]
 
 class HintCard extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class HintCard extends React.Component {
     }
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
-    this.onWriteHint = this.onWriteHint.bind(this);
+    this.onSubmitHint = this.onSubmitHint.bind(this);
   }
 
   inputHint (e) {
@@ -31,9 +31,16 @@ class HintCard extends React.Component {
     }
   }
 
-  onWriteHint (e) {
+
+  onSubmitHint (e) {
+    console.log('onSubmitHint')
     e.preventDefault();
-  }
+
+    var info = {
+      submittedHint: this.state.submittedHint
+    }
+    this.props.submitHint();
+  };
 
   render () {
     if(this.state.viewHints === false) {
@@ -87,10 +94,12 @@ class HintCard extends React.Component {
                 onClick={this.onViewHints}
               >View Hints</Button>
               <Button
-                onClick={this.onWriteHint}
+                onClick={this.onSubmitHint}
                 size='medium'
                 icon>
-                <Icon name='write' />
+                <Icon 
+                  name='write'
+                />
               </Button>
           </Form>
         </div>
@@ -104,8 +113,11 @@ class HintCard extends React.Component {
                 SCORE: {this.props.score}
               </Card.Header>
             </Card.Content>
-
-            <Image src={this.props.currentCard.pictureUrl} />
+            <div style={{overflow: 'scroll'}}>
+            {dummydata.map(function(data, index) {
+              return <HintEntry key={index} data={data} />
+            })}
+            </div>
             <Card.Header>
               Liked Hints:
             </Card.Header>
@@ -143,15 +155,12 @@ class HintCard extends React.Component {
                 onClick={this.onViewHints}
               >View Hints</Button>
               <Button
-                onClick={this.onWriteHint}
+                onClick={this.submitHint}
                 size='medium'
                 icon>
                 <Icon name='write' />
               </Button>
           </Form>
-          {dummydata.map(function(data) {
-            return <HintEntry />
-          })}
           
         </div>
       )
