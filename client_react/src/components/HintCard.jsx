@@ -8,10 +8,25 @@ class HintCard extends React.Component {
     this.state = {
       submittedHint: '',
       viewHints: false,
+      pointDisplay: 'none',
     }
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
     this.onWriteHint = this.onWriteHint.bind(this);
+    this.hoverHint = this.hoverHint.bind(this);
+    this.mouseLeave = this.mouseLeave.bind(this);
+  }
+
+  hoverHint() {
+    this.setState({
+      pointDisplay: 'inline',
+    })
+  }
+
+  mouseLeave() {
+    this.setState({
+      pointDisplay: 'none',
+    })
   }
 
   inputHint (e) {
@@ -40,7 +55,10 @@ class HintCard extends React.Component {
           <Card style={{width: '100%', paddingBottom: 15}}>
             <Card.Content>
               <Card.Header>
-                SCORE: {this.props.score}
+                <p style={{"float": "left"}}>SCORE: {this.props.score}</p> 
+                <p style={{"float": "right", "display": this.state.pointDisplay}}>
+                -25 POINTS
+                </p>
               </Card.Header>
             </Card.Content>
             
@@ -65,6 +83,8 @@ class HintCard extends React.Component {
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
+                  onMouseEnter={this.hoverHint}
+                  onMouseLeave={this.mouseLeave}
                 >
                 HINT
                 </Button>
@@ -121,6 +141,8 @@ class HintCard extends React.Component {
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
+                  onMouseEnter={this.hoverHint}
+                  onMouseLeave={this.mouseLeave}
                 >
                 HINT
                 </Button>
@@ -149,6 +171,6 @@ class HintCard extends React.Component {
       )
     } 
   }
-}; 
+};
 
 export default HintCard;

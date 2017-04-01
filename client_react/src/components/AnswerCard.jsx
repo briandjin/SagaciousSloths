@@ -1,65 +1,121 @@
 import React from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 
-const AnswerCard = function(props) {
+var left = {
+  float:'left',
+  width:100,
+  height: 'auto'
+}
 
-  var left = {
-    float:'left',
-    width:100,
-    height: 'auto'
+var center = {
+  display: 'inline-block',
+  marginLeft: '8.5%',
+  width:100,
+  height: 'auto'
+}
+
+var right = {
+  float:'right',
+  width:100,
+  height: 'auto'
+}
+
+class AnswerCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pointsToAdd: this.props.roundPoints,
+      pointColor: 'black',
+      pointDisplay: 'none',
+    }
+    this.hoverCorrect = this.hoverCorrect.bind(this);
+    this.hoverAlmost = this.hoverAlmost.bind(this);
+    this.hoverMiss = this.hoverMiss.bind(this);
+    this.mouseLeave = this.mouseLeave.bind(this);
   }
 
-  var center = {
-    display: 'inline-block',
-    marginLeft: '8.5%',
-    width:100,
-    height: 'auto'
+  hoverCorrect() {
+    this.setState({
+      pointColor: 'green',
+      pointsToAdd: '+150',
+      pointDisplay: 'inline',
+
+    })
   }
 
-  var right = {
-    float:'right',
-    width:100,
-    height: 'auto'
+  hoverAlmost() {
+    this.setState({
+      pointColor: 'orange',
+      pointsToAdd: '+100',
+      pointDisplay: 'inline',
+    })
   }
 
-  return (
-    <div style={{width: 400, marginBottom: 200}}>
-      <Card style={{width: '100%', paddingBottom: 15}}>
-        <Card.Content>
-          <Card.Header>
-            SCORE: {props.score}
-          </Card.Header>
-        </Card.Content>
-        <Image src={props.currentCard.pictureUrl} />
-        <div>
-          {props.currentCard.firstname + ' ' + props.currentCard.lastname}
-        </div>
-          <Card.Content >
-            <Button
-              basic color='green'
-              onClick={props.onCorrect}
-              style={left}
-            >
-            CORRECT
-            </Button>
-            <Button
-              basic color='yellow'
-              onClick={props.onAlmost}
-              style={center}
-            >
-            ALMOST
-            </Button>
-            <Button
-              basic color='red'
-              onClick={props.onMiss}
-              style={right}
-            >
-            MISS
-            </Button>
-        </Card.Content>
-      </Card>
-    </div>
-  )
+  hoverMiss() {
+    this.setState({
+      pointColor: 'red',
+      pointsToAdd: 0,
+      pointDisplay: 'inline',
+    })
+  }
+
+  mouseLeave() {
+    this.setState({
+      pointColor: 'black',
+      pointsToAdd: this.props.roundPoints,
+      pointDisplay: 'none',
+    })
+  }
+
+  render() {
+    return (
+      <div style={{width: 400, marginBottom: 200}}>
+        <Card style={{width: '100%', paddingBottm: 15}}>
+          <Card.Content>
+            <Card.Header className="header">
+              <p style={{"float": "left"}}>SCORE: {this.props.score}</p> 
+              <p style={{"float": "right", "color": this.state.pointColor, "display": this.state.pointDisplay}}>
+              {this.state.pointsToAdd} POINTS
+              </p>
+            </Card.Header>
+          </Card.Content>
+          <Image src={this.props.currentCard.pictureUrl} />
+          <div>
+            {this.props.currentCard.firstname + ' ' + this.props.currentCard.lastname}
+          </div>
+            <Card.Content >
+              <Button
+                basic color='green'
+                onClick={this.props.onCorrect}
+                style={left}
+                onMouseEnter={this.hoverCorrect}
+                onMouseLeave={this.mouseLeave}
+              >
+              Correct
+              </Button>
+              <Button
+                basic color='yellow'
+                onClick={this.props.onAlmost}
+                style={center}
+                onMouseEnter={this.hoverAlmost}
+                onMouseLeave={this.mouseLeave}
+              >
+              Almost
+              </Button>
+              <Button
+                basic color='red'
+                onClick={this.props.onMiss}
+                style={right}
+                onMouseEnter={this.hoverMiss}
+                onMouseLeave={this.mouseLeave}
+              >
+              Miss
+              </Button>
+          </Card.Content>
+        </Card>
+      </div>
+    )
+  }
 };
- 
+
 export default AnswerCard;
