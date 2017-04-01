@@ -81,7 +81,12 @@ class AnswerCard extends React.Component {
           </Card.Content>
           <Image src={this.props.currentCard.pictureUrl} />
           <div>
-            {this.props.currentCard.firstname + ' ' + this.props.currentCard.lastname}
+            <p style={{"float": "left", "fontWeight": "bold", "fontSize": "large", "marginLeft": "10px", "marginTop": "15px"}}>
+              {this.props.currentCard.firstname + ' ' + this.props.currentCard.lastname}
+            </p>
+            <p style={{"float": "right", "fontWeight": "bold", "fontSize": "large", "marginRight": "10px", "marginTop": "15px"}}>
+              {this.props.currentCard.deck}
+            </p>
           </div>
             <Card.Content >
               <Button
