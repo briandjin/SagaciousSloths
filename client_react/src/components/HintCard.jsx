@@ -40,7 +40,7 @@ class HintCard extends React.Component {
           <Card style={{width: '100%', paddingBottom: 15}}>
             <Card.Content>
               <Card.Header>
-                Points: {this.props.points}
+                SCORE: {this.props.score}
               </Card.Header>
             </Card.Content>
             
@@ -60,13 +60,13 @@ class HintCard extends React.Component {
                   color='green'
                   onClick={this.props.onShowAnswer}
                 >
-                Answer
+                ANSWER
                 </Button>
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
                 >
-                Hint
+                HINT
                 </Button>
               </div>
             </Card.Content>
@@ -96,7 +96,7 @@ class HintCard extends React.Component {
           <Card style={{width: '100%', paddingBottom: 15}}>
             <Card.Content>
               <Card.Header>
-                Points: {this.props.points}
+                SCORE: {this.props.score}
               </Card.Header>
             </Card.Content>
             
@@ -116,13 +116,13 @@ class HintCard extends React.Component {
                   color='green'
                   onClick={this.props.onShowAnswer}
                 >
-                Answer
+                ANSWER
                 </Button>
                 <Button
                   basic color='yellow'
                   onClick={this.props.onHint}
                 >
-                Hint
+                HINT
                 </Button>
               </div>
             </Card.Content>
