@@ -52,9 +52,9 @@ class Game extends React.Component {
       type: 'GET',
       data: currentCardID,
       success: (data) => {
-        this.setState({
-          hints:
-        })
+        // this.setState({
+        //   hints:
+        // })
         console.log('Hint Posted');
       },
       error: (error) => {

@@ -36,7 +36,7 @@ class HintCard extends React.Component {
     e.preventDefault();
 
     var hintInfo = {
-      cardID: this.props.currentCard.id
+      cardID: this.props.currentCard.id,
       submittedHint: this.state.submittedHint
     }
     this.props.submitHint(hintInfo);

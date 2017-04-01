@@ -28,8 +28,8 @@ module.exports = {
     );
   },
 
-  addFamiliarities: function(familiarities) {
-    module.exports.populateDB(familiarities,
+  addFamiliarities: function(familiarities) {  
+    module.exports.populateDB(familiarities, 
       ((result) => console.log(result))
     );
   },
@@ -40,7 +40,7 @@ module.exports = {
     //   'complex unique string1': {algoData},  // full algoData object
     //   'complex unique string2': {algoData},
     // };
-
+    
     module.exports.findCard({StaffID: userId}, function(userCards) {
       // console.log('in getCardIds, userCards:', userCards);
 
@@ -55,8 +55,8 @@ module.exports = {
         cardIds[card.StudentID] = card.AlgoParams;
       });
 
-      callback(cardIds);
-
+      callback(cardIds);   
+         
     });
   },
 
@@ -65,7 +65,7 @@ module.exports = {
   //return an ordered array of userIds, from smallest (= earliest) nextQuizDate to largest
     // console.log('the cuttoff time', cutoff);
     Familiarities.find(
-      {StaffID: userId,
+      {StaffID: userId, 
         'AlgoParams.nextQuizDate': {$lt: cutoff},
       },
       function(err, orderedCards) {
@@ -78,13 +78,13 @@ module.exports = {
           var orderedCardIds = orderedCards.map(function(card) {
             // console.log('card:', card);
             return card.StudentID;
-          });
+          });          
         } else {
           orderedCardIds = [];
         }
 
         callback(orderedCardIds);
-      });
+      }); 
   },
 
   getAlgoParams(userId, cardId, callback) {
@@ -103,12 +103,12 @@ module.exports = {
         } else {
           callback();
         }
-      });
-  },y
+      }); 
+  },
 
   setAlgoParams(userId, cardId, algoParams, callback) {
-    Familiarities.update({StaffID: userId, StudentID: cardId},
-      {AlgoParams: algoParams},
+    Familiarities.update({StaffID: userId, StudentID: cardId}, 
+      {AlgoParams: algoParams}, 
       function(err, data) {
         if (err) {
           return handleError(err);
@@ -141,7 +141,7 @@ module.exports = {
     });
   },
   resetDB: function(cb) {
-    Familiarities.remove({}, function(error, result) {
+    Familiarities.remove({}, function(error, result) { 
       if (error) {
         console.error(error);
       } else {
@@ -150,7 +150,7 @@ module.exports = {
     });
   },
   findAll: function(cb) {
-    Familiarities.find({}, function(error, result) {
+    Familiarities.find({}, function(error, result) { 
 
       if (error) {
         console.error(error);
@@ -160,10 +160,10 @@ module.exports = {
     });
   },
   //Build query to update cards ALGO data based on the StudentID and StaffID
-  //insert document for card for student and teacher &or update to
+  //insert document for card for student and teacher &or update to 
   findCard: function(query, cb) { //structure: {StudentID: 3-15-2017 12:30:01, StaffID:1}
-
-    Familiarities.find(query, function(error, result) {
+    
+    Familiarities.find(query, function(error, result) { 
       if (error) {
         console.error(error);
       } else {
