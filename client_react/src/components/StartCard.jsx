@@ -26,7 +26,7 @@ class StartCard extends React.Component {
   render() {
     return (
       <div style={{width: 400, marginBottom: 200}}>
-        <Card style={{width: '100%', paddingBottm: 15}}>
+        <Card style={{width: '100%', paddingBottom: 15}}>
           <Card.Content>
             <Card.Header>
               <p style={{"float": "left"}}>SCORE: {this.props.score}</p>

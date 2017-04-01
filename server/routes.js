@@ -31,7 +31,13 @@ router.get('/quiz', handlers.quiz.get);
 
 router.get('/legacy', handlers.legacy.getCards);
 
-router.post('/submitScore', handlers.leaders.create);
+router.post('/leaders/create', handlers.leaders.create);
+
+router.get('/leaders/get', handlers.leaders.get);
+
+router.post('/hints/new', handlers.hints.post);
+
+router.get('/hints/get', handlers.hints.get);
 
 router.get('/logout',
   function(req, res) {
@@ -43,9 +49,5 @@ router.get('/logout',
 router.post('/api/card', handlers.api.card);
 
 router.get('/api/reset', handlers.api.reset);
-
-router.post('/leaders/create', handlers.leaders.create);
-
-router.get('/leaders/get', handlers.leaders.get);
 
 module.exports = router;

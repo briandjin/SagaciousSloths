@@ -22,24 +22,45 @@ class Game extends React.Component {
     this.onHint = this.onHint.bind(this);
     this.submitScore = this.submitScore.bind(this);
     this.submitHint = this.submitHint.bind(this);
+    this.getHints = this.getHints.bind(this);
   }
 
   componentDidMount () {
     console.log('cards', this.props.cards);
   }
 
-  submitHint (info) {
-    // $.ajax({
-    //   url: '',
-    //   type: 'POST',
-    //   data: info,
-    //   success: () => {
+  submitHint (hintInfo) {
+    $.ajax({
+      url: '/hints/new',
+      type: 'POST',
+      data: hintInfo,
+      success: () => {
+        this.getHints();
         console.log('Hint Posted');
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //   }
-    // })
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+  }
+
+  getHints () {
+    var currentCardID = this.props.cards[this.state.counter].id;
+
+    $.ajax({
+      url: '/hints/get',
+      type: 'GET',
+      data: currentCardID,
+      success: (data) => {
+        this.setState({
+          hints:
+        })
+        console.log('Hint Posted');
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   submitScore (info) {
