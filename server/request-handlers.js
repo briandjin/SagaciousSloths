@@ -64,7 +64,7 @@ var getDeckBucketCounts = function (req, res) {
         results[card.deck][bucket]++;
       });
 
-      console.log('Deck results:', results);
+      // console.log('Deck results:', results);
 
       res.status(200).send(results);
       // {deckname: {red: score, orange: score, green: score}, ...}
@@ -79,7 +79,7 @@ var getDeckQuiz = function (req, res) {
 
   var deckname = req.query.deck;
 
-  console.log('in get deck quiz, req.user:', req.user);
+  // console.log('in get deck quiz, req.user:', req.user);
 
   var userId = req.user._id;
   // query Familiarities from highest to lowest score for user
@@ -131,7 +131,7 @@ var updateUserCardFamiliarity = function (req, res) {
   let cardId = req.body.cardId;
   let answer = req.body.answer;
 
-  console.log('in handler, update card familiarity, update card id:', cardId, '  quiz res:', answer);
+  // console.log('in handler, update card familiarity, update card id:', cardId, '  quiz res:', answer);
 
   algorithm.updateFamiliarity(userId, cardId, answer);
 
@@ -150,11 +150,12 @@ var resetMongo = function (req, res) {
 };
 
 var newLeader = function (req, res) {
+  console.log('---> SCORE INFO', req.body)
   mongoLeaders.createLeaders(req.body, function(err, leader) {
     if (err) {
       console.error(err);
     } else {
-      res.send(200);
+      res.sendStatus(201);
     }
   });
 };
@@ -164,7 +165,7 @@ var getLeaders = function (req, res) {
     if (err) {
       console.error(err);
     } else {
-      res.send(leaders);
+      res.status(200).send(leaders);
     }
   });
 };
@@ -204,14 +205,20 @@ module.exports = {
   dashboard: {
     get: getDeckBucketCounts,
   },
-  legacy: getLegacyCards,
+
   quiz: {
     get: getDeckQuiz,
   },
+
   api: {
     reset: resetMongo,
     card: updateUserCardFamiliarity,
   },
+
+  legacy: {
+    getCards: getLegacyCards
+  },
+
   leaders: {
     create: newLeader,
     get: getLeaders,

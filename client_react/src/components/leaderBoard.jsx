@@ -10,7 +10,7 @@ const LeaderBoard = (props) => {
 	  	    <th>SCORE</th>
 	  	  </thead>
 	  	  <tbody>
-	  	    {props.scores.map(record => {
+	  	    {props.highScores.map(record => {
 	  	    	return (
 			  	    <tr>
 			  	  		<td>{record.nickname}</td>
