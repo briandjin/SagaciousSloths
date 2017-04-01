@@ -7,13 +7,13 @@ var HintCard = function (props) {
       <Card style={{width: '100%', paddingBottom: 15}}>
         <Card.Content>
           <Card.Header>
-            Points: {props.points}
+            SCORE: {props.score}
           </Card.Header>
         </Card.Content>
-        
+
         <Image src={props.currentCard.pictureUrl} />
         <Card.Header>
-          Liked Hints:
+          HINTS:
         </Card.Header>
         <Card.Meta>
           <span className='hint'>
@@ -26,25 +26,25 @@ var HintCard = function (props) {
               basic color='green'
               onClick={props.onShowAnswer}
             >
-            Answer
+            ANSWER
             </Button>
             <Button
               basic color='yellow'
               onClick={props.onHint}
             >
-            Hint
+            HINT
             </Button>
           </div>
         </Card.Content>
       </Card>
       <Form>
         <Form.Field>
-          <TextArea 
-            placeholder='Your Hint' 
+          <TextArea
+            placeholder='Your Hint'
             autoHeight/>
         </Form.Field>
           <Button>Submited Hints</Button>
-          <Button 
+          <Button
             size='medium'
             // style={{float: 'right'}}
             icon>

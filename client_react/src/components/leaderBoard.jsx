@@ -3,7 +3,7 @@ import React from 'react';
 const LeaderBoard = (props) => {
   return (
   	<div className="leaderBoard">
-  		<h3>Leader Board</h3>
+  		<h3>LEADERBOARD</h3>
 	  	<table>
 	  	  <thead>
 	  	    <th style={{'paddingRight': '50px'}}>NAME</th>
@@ -13,8 +13,8 @@ const LeaderBoard = (props) => {
 	  	    {props.scores.map(record => {
 	  	    	return (
 			  	    <tr>
-			  	  		<td>{record.nickname}</td>	
-			  	  		<td>{record.score}</td>	
+			  	  		<td>{record.nickname}</td>
+			  	  		<td>{record.score}</td>
 			  	  	</tr>
 	  	    	)
 	  	    })}

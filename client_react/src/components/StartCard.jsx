@@ -5,10 +5,10 @@ const StartCard = function (props) {
 
   return (
     <div style={{width: 400, marginBottom: 200}}>
-      <Card style={{width: '100%', paddingBottm: 15}}>
+      <Card style={{width: '100%', paddingBottom: 15}}>
         <Card.Content>
           <Card.Header>
-            Points: {props.points}
+            SCORE: {props.score}
           </Card.Header>
         </Card.Content>
         <Image src={props.currentCard.pictureUrl} />
@@ -18,13 +18,13 @@ const StartCard = function (props) {
               basic color='green'
               onClick={props.onShowAnswer}
             >
-            Answer
+            ANSWER
             </Button>
             <Button
               basic color='yellow'
               onClick={props.onHint}
             >
-            Hint
+            HINT
             </Button>
           </div>
         </Card.Content>

@@ -113,8 +113,8 @@ var getDeckQuiz = function (req, res) {
 
       // console.log('@@@@@@@@@ Sending to React the cards:', quizCards);
 
+      console.log(quizCards);
       res.status(200).send(quizCards);
-
     });
   });
 };
@@ -149,19 +149,13 @@ var resetMongo = function (req, res) {
   });
 };
 
-var getWildCards = function (req, res) {
-  googleSheet.getAllCards(function(cards) {
-    res.status(200).send(cards);
-  });
-};
-
 var newLeader = function (req, res) {
   mongoLeaders.createLeaders(req.body, function(err, leader) {
     if (err) {
       console.error(err);
     } else {
       res.send(200);
-    } 
+    }
   });
 };
 
@@ -175,12 +169,42 @@ var getLeaders = function (req, res) {
   });
 };
 
+var getLegacyCards = function (req, res) {
+  googleSheet.getAllCards(function(cards) {
+    // req.query = ['SF72', 'STAFF'];
+    // {deck: "SF73", ...}
+    var selectedDecks = req.query.gameDecks;
+    var selectedCards = [];
+    cards.forEach(function(card) {
+      selectedDecks.forEach(function(deck) {
+        if (card.deck === deck) {
+          selectedCards.push(card);
+        }
+      })
+    });
+
+    var shuffle = function(array) {
+      var j, x, i;
+      for (i = array.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = array[i - 1];
+        array[i - 1] = array[j];
+        array[j] = x;
+      }
+    };
+
+    shuffle(selectedCards);
+
+    res.status(200).send(selectedCards);
+  })
+};
+
 //------ Exports -------------------------
 module.exports = {
   dashboard: {
     get: getDeckBucketCounts,
-    getWild: getWildCards,
   },
+  legacy: getLegacyCards,
   quiz: {
     get: getDeckQuiz,
   },
