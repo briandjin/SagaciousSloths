@@ -3,6 +3,7 @@ var mongo = require(__dirname + '/../databases/mongo/models/familiarities');
 var mongoUsers = require(__dirname + '/../databases/mongo/models/users');
 var algorithm = require('./repetition-algorithm');
 var mongoLeaders = require(__dirname + '/../databases/mongo/models/leaders');
+var mongoHints = require(__dirname + '/../databases/mongo/models/hints');
 
   // NOTE: mongo structure:
   //   userId, cardId, algoData (an object) {bucket: 'red/orange/green'}
@@ -170,6 +171,16 @@ var getLeaders = function (req, res) {
   });
 };
 
+var shuffle = function(array) {
+  var j, x, i;
+  for (i = array.length; i; i--) {
+    j = Math.floor(Math.random() * i);
+    x = array[i - 1];
+    array[i - 1] = array[j];
+    array[j] = x;
+  }
+};
+
 var getLegacyCards = function (req, res) {
   googleSheet.getAllCards(function(cards) {
     // req.query = ['SF72', 'STAFF'];
@@ -184,16 +195,6 @@ var getLegacyCards = function (req, res) {
       })
     });
 
-    var shuffle = function(array) {
-      var j, x, i;
-      for (i = array.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        x = array[i - 1];
-        array[i - 1] = array[j];
-        array[j] = x;
-      }
-    };
-
     shuffle(selectedCards);
 
     res.status(200).send(selectedCards);
@@ -202,12 +203,27 @@ var getLegacyCards = function (req, res) {
 
 var postHint = function(req, res) {
   var hintInfo = req.body;
-
+  mongoHints.createHint(hintInfo, function (err, success) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('---postHint');
+      res.sendStatus(201);
+    }
+  });
 };
 
 var getHints = function(req, res) {
-  var cardID = req.query
-
+  var cardID = req.query;
+  console.log('---reqquery', req.query);
+  mongoHints.getHintsByID(cardID, function(err, hints) {
+    if (err) {
+      console.error(err);
+    } else {
+      shuffle(hints);
+      res.status(200).send(hints);
+    }
+  })
 };
 
 //------ Exports -------------------------
