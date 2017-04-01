@@ -28,6 +28,7 @@ class Game extends React.Component {
   }
 
   submitScore (info) {
+    console.log('SCORE INFO', info);
     $.ajax({
       url: '/leaders/create',
       type: 'POST',

@@ -6,6 +6,8 @@ class GameOver extends React.Component {
     this.state = {
       nickname: ''
     };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
   }
 
   onNameChange(e) {

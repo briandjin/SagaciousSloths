@@ -19,7 +19,7 @@ class Quiz extends React.Component {
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
-      highScores: [{nickname: 'bryan', score: 1500}, {nickname: 'allen', score: 1000}],
+      highScores: [],
       gameDecks: [],
     };
     this.isReady = this.isReady.bind(this);
@@ -27,11 +27,12 @@ class Quiz extends React.Component {
     this.loadDashboard = this.loadDashboard.bind(this);
     this.moveBackToReady = this.moveBackToReady.bind(this);
     this.renderNextStudent = this.renderNextStudent.bind(this);
+    this.logOut = this.logOut.bind(this);
+    this.addToSearch = this.addToSearch.bind(this);
     this.saveUserAnswer = this.saveUserAnswer.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getLegacyCards = this.getLegacyCards.bind(this);
-    this.logOut = this.logOut.bind(this);
-    this.addToSearch = this.addToSearch.bind(this);
+    this.getLeaderboard = this.getLeaderboard.bind(this);
   }
 
   componentDidMount () {
@@ -81,16 +82,29 @@ class Quiz extends React.Component {
   loadDashboard () {
     var _this = this;
     axios.get('/dashboard')
-    .then(function (response) {
+    .then(function(response) {
       var cohortList = Object.keys(response.data).sort();
       _this.setState({
         cohortList: cohortList,
         cohortStats: response.data
       });
+      _this.getLeaderboard();
       _this.setState({
         page: 'dashboard'
       });
     });
+  }
+
+  getLeaderboard () {
+    var _this = this;
+
+    axios.get('/leaders/get')
+    .then(function(response) {
+      _this.setState({
+        highScores: response.data
+      });
+      console.log('highScores', _this.state.highScores);
+    })
   }
 
   saveUserAnswer(event, answer) {
