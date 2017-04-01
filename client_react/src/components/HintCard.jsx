@@ -2,8 +2,6 @@ import React from 'react';
 import { Card, Icon, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import HintEntry from './HintEntry.jsx';
 
-var dummydata = ['Hint 1', 'Hint 2', 'Hint 3']
-
 class HintCard extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +35,7 @@ class HintCard extends React.Component {
 
     var hintInfo = {
       cardID: this.props.currentCard.id,
-      submittedHint: this.state.submittedHint
+      hint: this.state.submittedHint
     }
     this.props.submitHint(hintInfo);
   }
@@ -58,11 +56,11 @@ class HintCard extends React.Component {
 
             <Image src={this.props.currentCard.pictureUrl} />
             <Card.Header>
-              Liked Hints:
+            RANDOM HINT:
             </Card.Header>
             <Card.Meta>
               <span className='hint'>
-                Randomly selected liked hint
+              {this.props.hints[this.props.hintIndex].hint}
               </span>
             </Card.Meta>
             <Card.Content extra>
@@ -114,16 +112,16 @@ class HintCard extends React.Component {
               </Card.Header>
             </Card.Content>
             <div style={{overflow: 'scroll'}}>
-            {dummydata.map(function(data, index) {
-              return <HintEntry key={index} data={data} />
+            {this.props.hints.map(function(hint, index) {
+              return <HintEntry key={index} hint={hint} />
             })}
             </div>
             <Card.Header>
-              Liked Hints:
+              RANDOM HINT:
             </Card.Header>
             <Card.Meta>
               <span className='hint'>
-                Randomly selected liked hint
+                {this.props.hints[this.props.hintIndex].hint}
               </span>
             </Card.Meta>
             <Card.Content extra>

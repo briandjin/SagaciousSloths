@@ -12,7 +12,9 @@ class Game extends React.Component {
     this.state = {
       display: 'start',
       counter: 0,
-      score: 0
+      score: 0,
+      hints: [],
+      hintIndex: 0
     }
     this.onCorrect = this.onCorrect.bind(this);
     this.onAlmost = this.onAlmost.bind(this);
@@ -36,7 +38,6 @@ class Game extends React.Component {
       data: hintInfo,
       success: () => {
         this.getHints();
-        console.log('Hint Posted');
       },
       error: (error) => {
         console.error(error);
@@ -45,17 +46,19 @@ class Game extends React.Component {
   }
 
   getHints () {
-    var currentCardID = this.props.cards[this.state.counter].id;
+    var currentCardID = {
+      cardID: this.props.cards[this.state.counter].id
+    };
 
     $.ajax({
       url: '/hints/get',
       type: 'GET',
       data: currentCardID,
-      success: (data) => {
-        // this.setState({
-        //   hints:
-        // })
-        console.log('Hint Posted');
+      success: (hints) => {
+        this.setState({
+          hints: hints
+        });
+        console.log('HINTS', this.state.hints);
       },
       error: (error) => {
         console.error(error);
@@ -94,10 +97,13 @@ class Game extends React.Component {
   }
 
   onHint() {
-    if (this.state.display !== 'hint') {
+    var random = Math.floor(Math.random() * this.state.length);
+
+    if (this.state.display !== 'hint' && this.state.hint > 0) {
       this.setState({
         display: 'hint',
-        score: this.state.score - 25
+        score: this.state.score - 25,
+        hintIndex: random
       });
     } else {
       this.setState({display: 'start'})
@@ -125,6 +131,8 @@ class Game extends React.Component {
     if (this.state.display === 'hint') {
       return (
         <HintCard
+          hints={this.state.hints}
+          hintIndex={this.state.hintIndex}
           score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
@@ -147,6 +155,8 @@ class Game extends React.Component {
     } else if (this.state.display === 'start') {
       return (
         <StartCard
+          submitHint={this.submitHint}
+          hints={this.state.hints}
           score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
           onShowAnswer={this.onShowAnswer}
