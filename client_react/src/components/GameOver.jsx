@@ -5,26 +5,39 @@ class GameOver extends React.Component {
     super(props);
     this.state = {
       nickname: ''
-    }
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
   }
 
   onNameChange(e) {
     this.setState({
       nickname: e.target.value
-    })
+    });
+  }
+
+  onSubmit() {
+    var info = {
+      nickname: this.state.nickname,
+      score: this.props.score
+    };
+    this.props.submitScore(info);
   }
 
   render() {
     return (
       <div>
+        <div>
+          SCORE: {this.props.score}
+        </div>
         <input
           type="text"
           onChange={this.onNameChange}
         />
-      </div>
-      <button onClick={this.submit}>
+      <button onClick={this.onSubmit}>
         SUBMIT SCORE
       </button>
+      </div>
     )
   }
 };

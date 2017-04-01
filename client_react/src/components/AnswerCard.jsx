@@ -73,7 +73,7 @@ class AnswerCard extends React.Component {
         <Card style={{width: '100%', paddingBottm: 15}}>
           <Card.Content>
             <Card.Header className="header">
-              <p style={{"float": "left"}}>SCORE: {this.props.score}</p> 
+              <p style={{"float": "left"}}>SCORE: {this.props.score}</p>
               <p style={{"float": "right", "color": this.state.pointColor, "display": this.state.pointDisplay}}>
               {this.state.pointsToAdd} POINTS
               </p>
@@ -91,7 +91,7 @@ class AnswerCard extends React.Component {
                 onMouseEnter={this.hoverCorrect}
                 onMouseLeave={this.mouseLeave}
               >
-              Correct
+              CORRECT
               </Button>
               <Button
                 basic color='yellow'
@@ -100,7 +100,7 @@ class AnswerCard extends React.Component {
                 onMouseEnter={this.hoverAlmost}
                 onMouseLeave={this.mouseLeave}
               >
-              Almost
+              ALMOST
               </Button>
               <Button
                 basic color='red'
@@ -109,7 +109,7 @@ class AnswerCard extends React.Component {
                 onMouseEnter={this.hoverMiss}
                 onMouseLeave={this.mouseLeave}
               >
-              Miss
+              MISS
               </Button>
           </Card.Content>
         </Card>
