@@ -173,14 +173,16 @@ var getLegacyCards = function (req, res) {
   googleSheet.getAllCards(function(cards) {
     // req.query = ['SF72', 'STAFF'];
     // {deck: "SF73", ...}
-    var selectedDecks = req.query.gameModeDecks;
-    var selectedCards = cards.filter(function(card) {
+    var selectedDecks = req.query.gameDecks;
+    var selectedCards = [];
+    cards.forEach(function(card) {
       selectedDecks.forEach(function(deck) {
         if (card.deck === deck) {
-          return card;
+          selectedCards.push(card);
         }
       })
     });
+    console.log('---> selectedCards', selectedCards);
     res.status(200).send(selectedCards);
   })
 };

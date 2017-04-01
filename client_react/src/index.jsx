@@ -41,17 +41,18 @@ class Quiz extends React.Component {
 // ------------- GAME -------------
   getLegacyCards () {
     var selectedDecks = {
-      gameModeDecks: this.state.gameModeDecks
+      gameDecks: this.state.gameDecks
     };
 
     $.ajax({
-      url: '/getLegacyCards',
+      url: '/legacy',
       type: 'GET',
       data: selectedDecks,
       success: (selectedCards) => {
         this.setState({
           cards: selectedCards
         })
+        this.startGame();
       },
       error: (err) => {
         console.error(err)
@@ -61,7 +62,6 @@ class Quiz extends React.Component {
 
   startGame () {
     this.setState({ page: 'game' });
-    // this.getLegacyCards();
   }
 
   logOut() {
@@ -231,7 +231,7 @@ class Quiz extends React.Component {
 
         <DeckOptionsInput
           list={this.state.cohortList}
-          startGame={this.startGame}
+          getLegacyCards={this.getLegacyCards}
           addToSearch={this.addToSearch}/>
         </div>
         <div>

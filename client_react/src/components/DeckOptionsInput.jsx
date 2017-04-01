@@ -5,7 +5,7 @@ import DeckOptionsEntry from './DeckOptionsEntry.jsx'
 const DeckOptionsInput = function (props) {
   return (
     <div className='deckOptionsInput'>
-      <h3>Build a Deck</h3>
+      <h3>BUILD A DECK!</h3>
       <table>
         <tbody>
         {props.list.map((entry, index) => {
@@ -16,9 +16,9 @@ const DeckOptionsInput = function (props) {
         </tbody>
       </table>
       <Button
-        onClick={props.startGame}
+        onClick={props.getLegacyCards}
         basic color='orange'>
-        Start
+        START
       </Button>
 
     </div>
