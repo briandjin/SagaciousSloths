@@ -32,5 +32,5 @@ const StartCard = function (props) {
     </div>
   )
 }
-
+ 
 export default StartCard;

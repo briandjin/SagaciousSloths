@@ -149,6 +149,6 @@ class HintCard extends React.Component {
       )
     } 
   }
-};
+}; 
 
 export default HintCard;

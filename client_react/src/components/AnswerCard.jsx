@@ -61,5 +61,5 @@ const AnswerCard = function(props) {
     </div>
   )
 };
-
+ 
 export default AnswerCard;

@@ -15,7 +15,7 @@ class Quiz extends React.Component {
     this.state = {
       cards: [],
       counter: 0,
-      ready: false,
+      ready: false, 
       page: 'dashboard',
       cohortList: [],
       cohortStats: {},
