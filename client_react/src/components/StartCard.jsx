@@ -18,6 +18,8 @@ class StartCard extends React.Component {
     this.hoverHint = this.hoverHint.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.onSubmitHint = this.onSubmitHint.bind(this);
+
+    this.props.getHints();
   }
 
   onSubmitHint (e) {
@@ -29,6 +31,9 @@ class StartCard extends React.Component {
       hint: this.state.submittedHint
     }
     this.props.submitHint(hintInfo);
+    // this.setState({
+    //   submittedHint: ''
+    // });
   }
 
   inputHint (e) {
@@ -83,7 +88,8 @@ class StartCard extends React.Component {
           </Card>
         </div>
       )
-    } else {
+
+    } else { // NO HINTS
       return (
         <div style={{width: 400, marginBottom: 200}}>
           <Card style={{width: '100%', paddingBottom: 15}}>
@@ -121,8 +127,8 @@ class StartCard extends React.Component {
                     autoHeight/>
                 </Form.Field>
                   <Button
-                    onClick={this.onViewHints}
-                  >View Hints</Button>
+                    onClick={(e)=>{e.preventDefault()}}
+                  >NO HINTS AVAILABLE</Button>
                   <Button
                     onClick={this.onSubmitHint}
                     size='medium'

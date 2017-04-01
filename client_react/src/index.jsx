@@ -101,8 +101,12 @@ class Quiz extends React.Component {
 
     axios.get('/leaders/get')
     .then(function(response) {
+      response.data.sort(function(a, b) {
+        return b.score - a.score;
+      });
+
       _this.setState({
-        highScores: response.data
+        highScores: response.data.slice(0, 10)
       });
       console.log('highScores', _this.state.highScores);
     })

@@ -19,12 +19,13 @@ class HintCard extends React.Component {
     console.log(e.target.value);
   }
 
+// VIEW ALL HINTS
   onViewHints (e) {
     e.preventDefault();
-    if (this.state.viewHints === false) {
+    if (this.state.viewHints === false && this.props.hints.length > 0) {
       this.setState({viewHints: true});
-    }
-    else {
+    } else {
+      console.log('no hints');
       this.setState({viewHints: false});
     }
   }
@@ -38,6 +39,9 @@ class HintCard extends React.Component {
       hint: this.state.submittedHint
     }
     this.props.submitHint(hintInfo);
+    // this.setState({
+    //   submittedHint: ''
+    // });
   }
 
   render () {
@@ -153,7 +157,7 @@ class HintCard extends React.Component {
                 onClick={this.onViewHints}
               >View Hints</Button>
               <Button
-                onClick={this.submitHint}
+                onClick={this.onSubmitHint}
                 size='medium'
                 icon>
                 <Icon name='write' />

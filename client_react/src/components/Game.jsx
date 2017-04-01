@@ -14,7 +14,7 @@ class Game extends React.Component {
       counter: 0,
       score: 0,
       hints: [],
-      hintIndex: 0
+      hintIndex: -1
     }
     this.onCorrect = this.onCorrect.bind(this);
     this.onAlmost = this.onAlmost.bind(this);
@@ -93,32 +93,34 @@ class Game extends React.Component {
   }
 
   onShowAnswer() {
-    this.setState({display: 'show answer'});
+    this.setState({
+      display: 'show answer',
+      hintIndex: - 1
+    });
   }
 
   onHint() {
-    var random = Math.floor(Math.random() * this.state.length);
-
-    if (this.state.display !== 'hint' && this.state.hint > 0) {
+    if (this.state.display !== 'hint' && this.state.hints.length > 0 && (this.state.hintIndex < this.state.hints.length - 1)) {
       this.setState({
         display: 'hint',
         score: this.state.score - 25,
-        hintIndex: random
+        hintIndex: this.state.hintIndex + 1
       });
-    } else {
-      this.setState({display: 'start'})
+    } else if (this.state.hintIndex < this.state.hints.length - 1){
+      this.setState({
+        score: this.state.score - 25,
+        hintIndex: this.state.hintIndex + 1
+      });
     }
   }
 
   onCorrect() {
     this.setState({score: this.state.score + 150});
-    // this.resetRoundPoints();
     this.onAnswer();
   }
 
   onAlmost() {
     this.setState({score: this.state.score + 100});
-    // this.resetRoundPoints();
     this.onAnswer();
   }
 
@@ -156,6 +158,7 @@ class Game extends React.Component {
       return (
         <StartCard
           submitHint={this.submitHint}
+          getHints={this.getHints}
           hints={this.state.hints}
           score={this.state.score}
           currentCard={this.props.cards[this.state.counter]}
