@@ -200,6 +200,16 @@ var getLegacyCards = function (req, res) {
   })
 };
 
+var postHint = function(req, res) {
+  var hintInfo = req.body;
+
+};
+
+var getHints = function(req, res) {
+  var cardID = req.query
+
+};
+
 //------ Exports -------------------------
 module.exports = {
   dashboard: {
@@ -217,6 +227,11 @@ module.exports = {
 
   legacy: {
     getCards: getLegacyCards
+  },
+
+  hints: {
+    post: postHint,
+    get: getHints
   },
 
   leaders: {

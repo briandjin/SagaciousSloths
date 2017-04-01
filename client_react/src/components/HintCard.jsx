@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Icon, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import HintEntry from './HintEntry.jsx';
 
-var dummydata = ['Hint 1', 'Hint 2', 'Hint 3', 4, 5, 6, 7]
+var dummydata = ['Hint 1', 'Hint 2', 'Hint 3']
 
 class HintCard extends React.Component {
   constructor(props) {
@@ -31,16 +31,16 @@ class HintCard extends React.Component {
     }
   }
 
-
   onSubmitHint (e) {
     console.log('onSubmitHint')
     e.preventDefault();
 
-    var info = {
+    var hintInfo = {
+      cardID: this.props.currentCard.id
       submittedHint: this.state.submittedHint
     }
-    this.props.submitHint();
-  };
+    this.props.submitHint(hintInfo);
+  }
 
   render () {
     if(this.state.viewHints === false) {
@@ -97,7 +97,7 @@ class HintCard extends React.Component {
                 onClick={this.onSubmitHint}
                 size='medium'
                 icon>
-                <Icon 
+                <Icon
                   name='write'
                 />
               </Button>
@@ -161,7 +161,7 @@ class HintCard extends React.Component {
                 <Icon name='write' />
               </Button>
           </Form>
-          
+
         </div>
       )
     }
