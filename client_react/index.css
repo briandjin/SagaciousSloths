@@ -251,6 +251,7 @@
 
 .deckOptionsInput {
   display: inline-table;
+  float: left;
   width: 200px;
   height: 40%;
   margin-left: 20px;
@@ -264,6 +265,7 @@
 
 .leaderBoard {
   display: inline-table;
+  float: left;
   width: 200px;
   height: 40%;
   margin-left: 20px;
