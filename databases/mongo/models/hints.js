@@ -29,5 +29,7 @@ createHint = function (hintObj, callback) {
   });
 }
 
+console.log('Heroku Test');
+
 module.exports.createHint = createHint;
 module.exports.getHintsByID = getHintsByID;
