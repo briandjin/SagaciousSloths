@@ -12,6 +12,7 @@ class HintCard extends React.Component {
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
     this.onSubmitHint = this.onSubmitHint.bind(this);
+    this.onRemoveHint = this.onRemoveHint.bind(this);
   }
 
   inputHint (e) {
@@ -44,7 +45,15 @@ class HintCard extends React.Component {
     // });
   }
 
+  onRemoveHint() {
+    console.log('remove hint');
+  }
+  
+  
   render () {
+  
+  const self = this;
+
     if(this.state.viewHints === false) {
       return (
         <div style={{width: 400, marginBottom: 200}}>
@@ -117,7 +126,7 @@ class HintCard extends React.Component {
             </Card.Content>
             <div style={{overflow: 'scroll'}}>
             {this.props.hints.map(function(hint, index) {
-              return <HintEntry key={index} hint={hint} />
+              return <HintEntry key={index} hint={hint} onRemoveHint={self.onRemoveHint}/>
             })}
             </div>
             <Card.Header>

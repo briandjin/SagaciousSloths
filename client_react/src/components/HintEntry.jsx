@@ -16,7 +16,11 @@ const HintEntry = (props) => (
     <Button
       size='medium'
       icon>
-      <Icon name='close' style={{float: 'right'}}/>
+      <Icon 
+        name='close' 
+        style={{float: 'right'}}
+        onClick={props.onRemoveHint}
+      />
     </Button>
   </Segment>
 )
