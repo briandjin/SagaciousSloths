@@ -9,11 +9,14 @@ class HintCard extends React.Component {
     this.state = {
       submittedHint: '',
       viewHints: false,
+      display: 'none'
     }
 
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
     this.onSubmitHint = this.onSubmitHint.bind(this);
+    this.hoverHint = this.hoverHint.bind(this);
+    this.mouseLeave = this.mouseLeave.bind(this);
   }
 
   inputHint (e) {
@@ -29,6 +32,18 @@ class HintCard extends React.Component {
       console.log('no hints');
       this.setState({viewHints: false});
     }
+  }
+
+  hoverHint() {
+    this.setState({
+      pointDisplay: 'inline',
+    })
+  }
+
+  mouseLeave() {
+    this.setState({
+      pointDisplay: 'none',
+    })
   }
 
   onSubmitHint (e) {
@@ -81,6 +96,8 @@ class HintCard extends React.Component {
                 ANSWER
                 </Button>
                 <Button
+                  onMouseEnter={this.hoverHint}
+                  onMouseLeave={this.mouseLeave}
                   basic color='yellow'
                   onClick={this.props.onHint}
                 >
