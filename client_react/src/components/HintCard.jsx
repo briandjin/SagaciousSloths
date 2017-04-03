@@ -129,7 +129,7 @@ class HintCard extends React.Component {
                 basic
                 color='black'
                 onClick={this.onViewHints}
-              >View Hints</Button>
+              >View All Hints</Button>
           </Form>
         </div>
       )
@@ -203,7 +203,7 @@ class HintCard extends React.Component {
                 basic
                 color='black'
                 onClick={this.onViewHints}
-              >View Hints</Button>
+              >View All Hints</Button>
           </Form>
 
         </div>
