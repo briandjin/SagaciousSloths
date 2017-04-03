@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Icon, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
+import { Card, Icon, Input, Image, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import HintEntry from './HintEntry.jsx';
+import $ from 'jquery';
 
 class HintCard extends React.Component {
   constructor(props) {
@@ -9,15 +10,14 @@ class HintCard extends React.Component {
       submittedHint: '',
       viewHints: false,
     }
+
     this.inputHint = this.inputHint.bind(this);
     this.onViewHints = this.onViewHints.bind(this);
     this.onSubmitHint = this.onSubmitHint.bind(this);
-    this.onRemoveHint = this.onRemoveHint.bind(this);
   }
 
   inputHint (e) {
     this.setState({submittedHint: e.target.value});
-    console.log(e.target.value);
   }
 
 // VIEW ALL HINTS
@@ -44,15 +44,10 @@ class HintCard extends React.Component {
     //   submittedHint: ''
     // });
   }
-
-  onRemoveHint() {
-    console.log('remove hint');
-  }
   
   
   render () {
-  
-  const self = this;
+    const self = this;
 
     if(this.state.viewHints === false) {
       return (
@@ -68,13 +63,13 @@ class HintCard extends React.Component {
             </Card.Content>
 
             <Image src={this.props.currentCard.pictureUrl} />
-            <Card.Header>
-            RANDOM HINT:
+            <Card.Header
+              style={{textAlign: 'center'}}
+            >RANDOM HINT:
             </Card.Header>
-            <Card.Meta>
-              <span className='hint'>
-              {this.props.hints[this.props.hintIndex].hint}
-              </span>
+            <Card.Meta
+              style={{textAlign: 'center'}}
+            >{this.props.hints[this.props.hintIndex].hint}
             </Card.Meta>
             <Card.Content extra>
               <div className='ui two buttons'>
@@ -96,9 +91,9 @@ class HintCard extends React.Component {
           </Card>
           <Form>
             <Form.Field>
-              <TextArea
+              <Input
                 onChange={this.inputHint}
-                placeholder='Your Hint'
+                focus placeholder='Your Hint'
                 autoHeight/>
             </Form.Field>
               <Button
@@ -126,11 +121,19 @@ class HintCard extends React.Component {
             </Card.Content>
             <div style={{overflow: 'scroll'}}>
             {this.props.hints.map(function(hint, index) {
-              return <HintEntry key={index} hint={hint} onRemoveHint={self.onRemoveHint}/>
+              return (
+                <HintEntry 
+                  key={index}   
+                  hint={hint} 
+                  index={index}
+                  deleteHint={self.props.deleteHint}
+                  hints={self.props.hints}
+                />)
             })}
             </div>
-            <Card.Header>
-              RANDOM HINT:
+            <Card.Header
+              style={{textAlign: 'center'}}
+            >RANDOM HINT:
             </Card.Header>
             <Card.Meta>
               <span className='hint'>
@@ -157,9 +160,10 @@ class HintCard extends React.Component {
           </Card>
           <Form>
             <Form.Field>
-              <TextArea
+              <Input
+                action={true}
                 onChange={this.inputHint}
-                placeholder='Your Hint'
+                focus placeholder='Your Hint'
                 autoHeight/>
             </Form.Field>
               <Button

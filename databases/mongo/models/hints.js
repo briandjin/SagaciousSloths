@@ -35,7 +35,7 @@ var removeHint = function(obj, callback) {
     if (err) {
       callback(err, null);
     } else {
-      console.log('---> EVENT REMOVED!')
+      console.log('---> HINT REMOVED!')
     }
   })
 };

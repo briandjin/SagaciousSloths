@@ -234,6 +234,7 @@ var getHints = function(req, res) {
       console.error(err);
     } else {
       shuffle(hints);
+      console.log('getHints sent', hints);
       res.status(200).send(hints);
     }
   })
