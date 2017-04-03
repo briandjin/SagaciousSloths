@@ -40,9 +40,9 @@ class HintCard extends React.Component {
       hint: this.state.submittedHint
     }
     this.props.submitHint(hintInfo);
-    // this.setState({
-    //   submittedHint: ''
-    // });
+    this.setState({
+      submittedHint: ''
+    });
   }
   
   
@@ -92,8 +92,10 @@ class HintCard extends React.Component {
           <Form>
             <Form.Field>
               <Input
+                focus
                 onChange={this.inputHint}
                 icon
+                value={this.state.submittedHint}
                 placeholder='Your Hint'>
                 <input />
                   <Button
@@ -167,6 +169,7 @@ class HintCard extends React.Component {
               <Input
                 onChange={this.inputHint}
                 icon
+                value={this.state.submittedHint}
                 placeholder='Your Hint'>
                 <input />
                   <Button
