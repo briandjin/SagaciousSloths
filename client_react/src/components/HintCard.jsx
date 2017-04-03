@@ -93,20 +93,24 @@ class HintCard extends React.Component {
             <Form.Field>
               <Input
                 onChange={this.inputHint}
-                focus placeholder='Your Hint'
-                autoHeight/>
+                icon
+                placeholder='Your Hint'>
+                <input />
+                  <Button
+                    onClick={this.onSubmitHint}
+                    size='medium'
+                    icon>
+                    <Icon
+                      name='write'
+                    />
+                  </Button>  
+              </Input>
             </Form.Field>
               <Button
+                basic
+                color='black'
                 onClick={this.onViewHints}
               >View Hints</Button>
-              <Button
-                onClick={this.onSubmitHint}
-                size='medium'
-                icon>
-                <Icon
-                  name='write'
-                />
-              </Button>
           </Form>
         </div>
       )
@@ -161,20 +165,25 @@ class HintCard extends React.Component {
           <Form>
             <Form.Field>
               <Input
-                action={true}
                 onChange={this.inputHint}
-                focus placeholder='Your Hint'
-                autoHeight/>
+                icon
+                placeholder='Your Hint'>
+                <input />
+                  <Button
+                    onClick={this.onSubmitHint}
+                    size='medium'
+                    icon>
+                    <Icon
+                      name='write'
+                    />
+                  </Button>  
+              </Input>
             </Form.Field>
               <Button
+                basic
+                color='black'
                 onClick={this.onViewHints}
               >View Hints</Button>
-              <Button
-                onClick={this.onSubmitHint}
-                size='medium'
-                icon>
-                <Icon name='write' />
-              </Button>
           </Form>
 
         </div>
